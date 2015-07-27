@@ -30,6 +30,8 @@ var Booklet = function (name, options) {
 
 	this.defaults = (typeof options !== 'undefined' ? options : {});
 
+	var SERVICES = [];
+
 	var booklet = this;
 
 	/**
@@ -167,12 +169,22 @@ var Booklet = function (name, options) {
 		*/
 		this.get = function (moduleName) {
 			var selectedModule;
-			for (var modulesCounter = 0, len = modules.length; modulesCounter < len; modulesCounter++) {
+			for (var modulesCounter = 0, len = MODULES.length; modulesCounter < len; modulesCounter++) {
 				if (MODULES[modulesCounter]['name'] === moduleName) {
 					selectedModule = MODULES[modulesCounter];
 				}
 			};
 			return selectedModule;
+		};
+
+		this.getService = function (serviceName) {
+			var selectedService;
+			for (var servicesCounter = 0, len = SERVICES.length; servicesCounter < len; servicesCounter++) {
+				if (SERVICES[servicesCounter]['name'] === serviceName) {
+					selectedService = SERVICES[servicesCounter];
+				}
+			};
+			return selectedService;
 		};
 
 		/**
@@ -206,6 +218,10 @@ var Booklet = function (name, options) {
 	this.createView = function (options) {
 		self.defaults = (typeof options !== 'undefined' ? options : {});
 		return new Page();
-	}
+	};
+
+	this.createService = function (serviceName, context) {
+		SERVICES.push({name : serviceName, fn : context});
+	};
 
 };
