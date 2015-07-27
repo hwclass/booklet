@@ -205,7 +205,7 @@ var Booklet = function (name, options) {
 	*/
 	this.createView = function (options) {
 		self.defaults = (typeof options !== 'undefined' ? options : {});
-		return new View();
+		return new Page();
 	}
 
 };
