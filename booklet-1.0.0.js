@@ -1,5 +1,5 @@
 /*!
- * booklet.js. A tiny modular application mediator project
+ * booklet.js. A simple module initializer by creating view models.
  *
  * Copyright (c) 2015 Barış Güler
  * http://hwclass.in
@@ -8,12 +8,15 @@
  * http://www.opensource.org/licenses/mit-license.php
  *
  *
- * Launch  : April 2015
- * Version : 1.1.0
- * Released: April 1st, 2015
+ * Launch  : July 2015
+ * Version : 1.0.0
+ * Released: July 27th, 2015
  *
  *
- * manages the view states and other functionalities in applications
+ * Manages the view states and other functionalities in page instances.
+ * Every page instance is generated from a Booklet instance.
+ * Page instances are related with a view and binds model data and functionalities.
+ * When the init method of a Page instance is invoked, it means that you are about to init related module.  
  */
 
 /**
