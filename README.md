@@ -1,5 +1,6 @@
 # booklet
 A simple module initializer by creating view models.
+The main attitude of this module binding system is inspired by Nicholas Zakas's presentation here : http://www.slideshare.net/nzakas/scalable-javascript-application-architecture
 
 ###Usage
 
