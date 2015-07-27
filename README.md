@@ -16,7 +16,7 @@ var booklet = new Booklet('booking', {someOption : 'some options'});
 
 <pre lang="javascript">
 <code>
-var page = booklet.createView('home');
+var home = booklet.createView('home');
 </code>
 </pre>
 
@@ -24,7 +24,7 @@ var page = booklet.createView('home');
 
 <pre lang="javascript">
 <code>
-page.register('testModule', function () {
+home.register('testModule', function () {
 	init : function () {
 		someMethod();
 	},
@@ -39,7 +39,7 @@ page.register('testModule', function () {
 
 <pre lang="javascript">
 <code>
-page.start('home');
+home.start('testModule');
 </code>
 </pre>
 
@@ -47,6 +47,6 @@ page.start('home');
 
 <pre lang="javascript">
 <code>
-page.startAll();
+home.startAll();
 </code>
 </pre>
