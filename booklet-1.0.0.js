@@ -220,6 +220,12 @@ var Booklet = function (name, options) {
 		return new Page();
 	};
 
+	/**
+	* createService() is a creator method for new services
+	*
+	* @param {String} serviceName
+	* @param {Object} context
+	*/
 	this.createService = function (serviceName, context) {
 		SERVICES.push({name : serviceName, fn : context});
 	};
