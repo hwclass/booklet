@@ -58,7 +58,7 @@ var Booklet = function (name, options) {
 		};
 
 		/**
-		* detach() is a subscribing method to listen publishing events
+		* detach() is a destroying the connection any module with the main booklet object
 		*
 		* @param {String} moduleName
 		*/
@@ -72,7 +72,7 @@ var Booklet = function (name, options) {
 		};
 
 		/**
-		* start() is a subscribing method to listen publishing events
+		* start() is starting point to make any module begin to work
 		*
 		* @param {String} moduleName
 		*/
@@ -85,7 +85,7 @@ var Booklet = function (name, options) {
 		};
 
 		/**
-		* startAll() is a sending data method to subscriptions listening publishing events
+		* startAll() is a starting point for all modules to make them all began to work
 		*
 		* @param {String} topic
 		* @param {Object} info
@@ -99,6 +99,11 @@ var Booklet = function (name, options) {
 			}
 		};
 
+		/**
+		* stop() is a method to stop a module working
+		*
+		* @param {moduleName} moduleName
+		*/
 		this.stop = function (moduleName) {
 			var selectedModuleToStop = self.getModule(moduleName);
 			selectedModuleToStop = null;
@@ -137,7 +142,7 @@ var Booklet = function (name, options) {
 		};
 
 		/**
-		* getModule() is a sending data method to subscriptions listening publishing events
+		* getModule() is a getter method to get modules with a module name and its index
 		*
 		* @param {String} topic
 		* @param {Object} info
@@ -162,21 +167,11 @@ var Booklet = function (name, options) {
 		};
 
 		/**
-		* get() is a sending data method to subscriptions listening publishing events
+		* getService() is a getter method to fetch the specified service with a service name
 		*
 		* @param {String} topic
 		* @param {Object} info
 		*/
-		this.get = function (moduleName) {
-			var selectedModule;
-			for (var modulesCounter = 0, len = MODULES.length; modulesCounter < len; modulesCounter++) {
-				if (MODULES[modulesCounter]['name'] === moduleName) {
-					selectedModule = MODULES[modulesCounter];
-				}
-			};
-			return selectedModule;
-		};
-
 		this.getService = function (serviceName) {
 			var selectedService;
 			for (var servicesCounter = 0, len = SERVICES.length; servicesCounter < len; servicesCounter++) {
@@ -188,17 +183,16 @@ var Booklet = function (name, options) {
 		};
 
 		/**
-		* getConfig() is a sending data method to subscriptions listening publishing events
+		* getConfig() is a method to get the current configuration properties and etc.
 		*
-		* @param {String} topic
-		* @param {Object} info
+		* @noparam
 		*/
 		this.getConfig = function () {
 			return booklet.config;
 		};
 
 		/**
-		* getUtility() is a sending data method to subscriptions listening publishing events
+		* getUtility() is a method to get the utility methods set into current context
 		*
 		* @param {String} topic
 		* @param {Object} info
@@ -210,7 +204,7 @@ var Booklet = function (name, options) {
 	};
 
 	/**
-	* createView() is a sending data method to subscriptions listening publishing events
+	* createView() is a creator method for new views
 	*
 	* @param {String} topic
 	* @param {Object} info
