@@ -32,6 +32,8 @@ var Booklet = function (name, options) {
 
 	var booklet = this;
 
+	this.SERVICES = [];
+
 	/**
 	* Page : The View-Model object to bind values and events
 	* @noparam
@@ -42,9 +44,9 @@ var Booklet = function (name, options) {
 
 		this.booklet = booklet;
 
-		var MODULES = [],
-				TOPPICS = [],
-				SERVICES = [];
+		this.MODULES = [],
+		this.TOPICS = [],
+		this.SERVICES = [];
 
 		/**
 		* register() is a registering method to add modules into the view model
@@ -53,7 +55,7 @@ var Booklet = function (name, options) {
 		* @param {Function} context
 		*/
 		this.register = function (moduleName, context) {
-			MODULES.push({name : moduleName, fn : context, started : false});
+			self.MODULES.push({name : moduleName, fn : context, started : false});
 		};
 
 		/**
@@ -64,7 +66,7 @@ var Booklet = function (name, options) {
 		this.detach = function (moduleName) {
 			var selectedModuleToDetach = self.getModule(moduleName, true);
 			try {
-				MODULES.splice(selectedModuleToDetach.index, 1);
+				self.MODULES.splice(selectedModuleToDetach.index, 1);
 			} catch (err) {
 				console.log(err);
 			};
@@ -89,9 +91,9 @@ var Booklet = function (name, options) {
 		* @noparam
 		*/
 		this.startAll = function () {
-			for (var modulesCounter = 0, len = MODULES.length; modulesCounter < len; modulesCounter++) {
-				if (!MODULES[modulesCounter].started) {
-					self.start(MODULES[modulesCounter].name);
+			for (var modulesCounter = 0, len = self.MODULES.length; modulesCounter < len; modulesCounter++) {
+				if (!self.MODULES[modulesCounter].started) {
+					self.start(self.MODULES[modulesCounter].name);
 				} else {
 				}
 			}
@@ -113,9 +115,9 @@ var Booklet = function (name, options) {
 		* @noparam
 		*/
 		this.stopAll = function () {
-			for (var modulesCounter = 0, len = MODULES.length; modulesCounter < len; modulesCounter++) {
-				if (!MODULES[modulesCounter].started) {
-					self.stop(MODULES[modulesCounter].name);
+			for (var modulesCounter = 0, len = self.MODULES.length; modulesCounter < len; modulesCounter++) {
+				if (!self.MODULES[modulesCounter].started) {
+					self.stop(self.MODULES[modulesCounter].name);
 				} else {
 				}
 			}
@@ -128,12 +130,12 @@ var Booklet = function (name, options) {
 		* @param {Function} listener
 		*/
 		this.subscribe = function (topic, listener) {
-		  if(!TOPICS[topic]) TOPICS[topic] = { queue: [] };
-		  var index = TOPICS[topic].queue.push(listener);
+		  if(!self.TOPICS[topic]) self.TOPICS[topic] = { queue: [] };
+		  var index = self.TOPICS[topic].queue.push(listener);
 		  return (function(index) {
 		    return {
 		      remove: function() {
-		        delete TOPICS[index];
+		        delete self.TOPICS[index];
 		      }
 		    }
 		  })(index);
@@ -146,8 +148,8 @@ var Booklet = function (name, options) {
 		* @param {Object} info
 		*/
 		this.publish = function (topic, info) {
-		  if(!TOPICS[topic] || !TOPICS[topic].queue.length) return;
-		  var items = TOPICS[topic].queue;
+		  if(!self.TOPICS[topic] || !self.TOPICS[topic].queue.length) return;
+		  var items = self.TOPICS[topic].queue;
 		  for(var x = 0; x < items.length; x++) {
 		    items[x](info || {});
 		  }
@@ -163,9 +165,9 @@ var Booklet = function (name, options) {
 			var selectedModule,
 					indexOfTheModule,
 					builtModuleObj;
-			for (var modulesCounter = 0, len = MODULES.length; modulesCounter < len; modulesCounter++) {
-				if (MODULES[modulesCounter]['name'] === moduleName) {
-					selectedModule = MODULES[modulesCounter];
+			for (var modulesCounter = 0, len = self.MODULES.length; modulesCounter < len; modulesCounter++) {
+				if (self.MODULES[modulesCounter]['name'] === moduleName) {
+					selectedModule = self.MODULES[modulesCounter];
 					indexOfTheModule = modulesCounter;
 				}
 			};
@@ -179,15 +181,25 @@ var Booklet = function (name, options) {
 		};
 
 		/**
+		* createService() is a creator method for new services
+		*
+		* @param {String} serviceName
+		* @param {Object} context
+		*/
+		this.createService = function (serviceName, context) {
+			self.SERVICES.push({name : serviceName, fn : context});
+		};
+
+		/**
 		* getService() is a getter method to fetch the specified service with a service name
 		*
 		* @param {String} serviceName
 		*/
 		this.getService = function (serviceName) {
 			var selectedService;
-			for (var servicesCounter = 0, len = SERVICES.length; servicesCounter < len; servicesCounter++) {
-				if (SERVICES[servicesCounter]['name'] === serviceName) {
-					selectedService = SERVICES[servicesCounter];
+			for (var servicesCounter = 0, len = self.SERVICES.length; servicesCounter < len; servicesCounter++) {
+				if (self.SERVICES[servicesCounter]['name'] === serviceName) {
+					selectedService = self.SERVICES[servicesCounter];
 				}
 			};
 			return selectedService;
@@ -230,7 +242,7 @@ var Booklet = function (name, options) {
 	* @param {Object} context
 	*/
 	this.createService = function (serviceName, context) {
-		SERVICES.push({name : serviceName, fn : context});
+		self.SERVICES.push({name : serviceName, fn : context});
 	};
 
 };
