@@ -21,8 +21,8 @@
 
 /**
 * Booklet : The main application wrapper object
-* @param <String> name
-* @param <Object> options
+* @param {String} name
+* @param {Object} options
 */
 var Booklet = function (name, options) {
 	
@@ -106,7 +106,23 @@ var Booklet = function (name, options) {
 		*/
 		this.stop = function (moduleName) {
 			var selectedModuleToStop = self.getModule(moduleName);
+			console.dir(selectedModuleToStop);
 			selectedModuleToStop = null;
+			console.dir(selectedModuleToStop);
+		};
+
+		/**
+		* stopAll() is a method to stop working all modules
+		*
+		* @noparam
+		*/
+		this.stopAll = function () {
+			for (var modulesCounter = 0, len = MODULES.length; modulesCounter < len; modulesCounter++) {
+				if (!MODULES[modulesCounter].started) {
+					self.stop(MODULES[modulesCounter].name);
+				} else {
+				}
+			}
 		};
 
 		/**
