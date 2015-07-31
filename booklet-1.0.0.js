@@ -30,8 +30,6 @@ var Booklet = function (name, options) {
 
 	this.defaults = (typeof options !== 'undefined' ? options : {});
 
-	var SERVICES = [];
-
 	var booklet = this;
 
 	/**
@@ -45,7 +43,8 @@ var Booklet = function (name, options) {
 		this.booklet = booklet;
 
 		var MODULES = [],
-				TOPPICS = [];
+				TOPPICS = [],
+				SERVICES = [];
 
 		/**
 		* register() is a registering method to add modules into the view model
@@ -87,8 +86,7 @@ var Booklet = function (name, options) {
 		/**
 		* startAll() is a starting point for all modules to make them all began to work
 		*
-		* @param {String} topic
-		* @param {Object} info
+		* @noparam
 		*/
 		this.startAll = function () {
 			for (var modulesCounter = 0, len = MODULES.length; modulesCounter < len; modulesCounter++) {
@@ -102,13 +100,11 @@ var Booklet = function (name, options) {
 		/**
 		* stop() is a method to stop a module working
 		*
-		* @param {moduleName} moduleName
+		* @param {String} moduleName
 		*/
 		this.stop = function (moduleName) {
 			var selectedModuleToStop = self.getModule(moduleName);
-			console.dir(selectedModuleToStop);
 			selectedModuleToStop = null;
-			console.dir(selectedModuleToStop);
 		};
 
 		/**
@@ -160,8 +156,8 @@ var Booklet = function (name, options) {
 		/**
 		* getModule() is a getter method to get modules with a module name and its index
 		*
-		* @param {String} topic
-		* @param {Object} info
+		* @param {String} moduleName
+		* @param {Boolean} withIndex
 		*/
 		this.getModule = function (moduleName, withIndex) {
 			var selectedModule,
@@ -185,8 +181,7 @@ var Booklet = function (name, options) {
 		/**
 		* getService() is a getter method to fetch the specified service with a service name
 		*
-		* @param {String} topic
-		* @param {Object} info
+		* @param {String} serviceName
 		*/
 		this.getService = function (serviceName) {
 			var selectedService;
@@ -210,8 +205,7 @@ var Booklet = function (name, options) {
 		/**
 		* getUtility() is a method to get the utility methods set into current context
 		*
-		* @param {String} topic
-		* @param {Object} info
+		* @noparam
 		*/
 		this.getUtility = function () {
 			return booklet.utility;
@@ -222,8 +216,7 @@ var Booklet = function (name, options) {
 	/**
 	* createView() is a creator method for new views
 	*
-	* @param {String} topic
-	* @param {Object} info
+	* @param {Object} options
 	*/
 	this.createView = function (options) {
 		self.defaults = (typeof options !== 'undefined' ? options : {});
