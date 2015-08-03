@@ -32,7 +32,8 @@ var Booklet = function (name, options) {
 
 	var booklet = this;
 
-	this.SERVICES = [];
+	this.SERVICES = [],
+	this.TOPICS = [];
 
 	/**
 	* Page : The View-Model object to bind values and events
@@ -45,7 +46,7 @@ var Booklet = function (name, options) {
 		this.booklet = booklet;
 
 		this.MODULES = [],
-		this.TOPICS = [],
+		this.TOPICS = booklet.TOPICS,
 		this.SERVICES = [];
 
 		/**
@@ -142,20 +143,6 @@ var Booklet = function (name, options) {
 		};
 
 		/**
-		* publish() is a sending data method to subscriptions listening publishing events
-		*
-		* @param {String} topic
-		* @param {Object} info
-		*/
-		this.publish = function (topic, info) {
-		  if(!self.TOPICS[topic] || !self.TOPICS[topic].queue.length) return;
-		  var items = self.TOPICS[topic].queue;
-		  for(var x = 0; x < items.length; x++) {
-		    items[x](info || {});
-		  }
-		};
-
-		/**
 		* getModule() is a getter method to get modules with a module name and its index
 		*
 		* @param {String} moduleName
@@ -243,6 +230,21 @@ var Booklet = function (name, options) {
 	*/
 	this.createService = function (serviceName, context) {
 		self.SERVICES.push({name : serviceName, fn : context});
+	};
+
+
+	/**
+	* publish() is a sending data method to subscriptions listening publishing events
+	*
+	* @param {String} topic
+	* @param {Object} info
+	*/
+	this.publish = function (topic, info) {
+	  if(!self.TOPICS[topic] || !self.TOPICS[topic].queue.length) return;
+	  var items = self.TOPICS[topic].queue;
+	  for(var x = 0; x < items.length; x++) {
+	    items[x](info || {});
+	  }
 	};
 
 };
