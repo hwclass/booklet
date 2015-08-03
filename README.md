@@ -50,3 +50,31 @@ home.start('testModule');
 home.startAll();
 </code>
 </pre>
+
+###Creating Services for Page Instance
+
+####Create a Page Service
+
+<pre lang="javascript">
+<code>
+page.createService('testService', function () {
+   return 'testService invoked'
+});
+</code>
+</pre>
+
+####Invoke the Current Page Service
+
+<pre lang="javascript">
+<code>
+page.register('menu', {
+   init : function () {
+      console.log(this.getServiceWorked()); //logs "testService invoked"
+   },
+   getServiceWorked : function () {
+      var testService = page.getService('testService');
+      return testService.context();
+   }
+})
+</code>
+</pre>
