@@ -26,6 +26,8 @@
 */
 var Booklet = function (name, options) {
 	
+	var selfOfBooklet = this;
+
 	this.name = name;
 
 	this.defaults = (typeof options !== 'undefined' ? options : {});
@@ -41,7 +43,7 @@ var Booklet = function (name, options) {
 	*/
 	var Page = function () {
 		
-		var self = this;
+		var selfOfPage = this;
 
 		this.booklet = booklet;
 
@@ -56,7 +58,7 @@ var Booklet = function (name, options) {
 		* @param {Function} context
 		*/
 		this.register = function (moduleName, context) {
-			self.MODULES.push({name : moduleName, fn : context, started : false});
+			selfOfPage.MODULES.push({name : moduleName, fn : context, started : false});
 		};
 
 		/**
@@ -65,9 +67,9 @@ var Booklet = function (name, options) {
 		* @param {String} moduleName
 		*/
 		this.detach = function (moduleName) {
-			var selectedModuleToDetach = self.getModule(moduleName, true);
+			var selectedModuleToDetach = selfOfPage.getModule(moduleName, true);
 			try {
-				self.MODULES.splice(selectedModuleToDetach.index, 1);
+				selfOfPage.MODULES.splice(selectedModuleToDetach.index, 1);
 			} catch (err) {
 				console.log(err);
 			};
@@ -79,7 +81,7 @@ var Booklet = function (name, options) {
 		* @param {String} moduleName
 		*/
 		this.start = function (moduleName) {
-			var selectedModuleToStart = self.getModule(moduleName);
+			var selectedModuleToStart = selfOfPage.getModule(moduleName);
 			if (!!selectedModuleToStart.fn) {
 				selectedModuleToStart.fn.init();
 				selectedModuleToStart.started = true;
@@ -92,9 +94,9 @@ var Booklet = function (name, options) {
 		* @noparam
 		*/
 		this.startAll = function () {
-			for (var modulesCounter = 0, len = self.MODULES.length; modulesCounter < len; modulesCounter++) {
-				if (!self.MODULES[modulesCounter].started) {
-					self.start(self.MODULES[modulesCounter].name);
+			for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
+				if (!selfOfPage.MODULES[modulesCounter].started) {
+					selfOfPage.start(selfOfPage.MODULES[modulesCounter].name);
 				} else {
 				}
 			}
@@ -106,7 +108,7 @@ var Booklet = function (name, options) {
 		* @param {String} moduleName
 		*/
 		this.stop = function (moduleName) {
-			var selectedModuleToStop = self.getModule(moduleName);
+			var selectedModuleToStop = selfOfPage.getModule(moduleName);
 			selectedModuleToStop = null;
 		};
 
@@ -116,9 +118,9 @@ var Booklet = function (name, options) {
 		* @noparam
 		*/
 		this.stopAll = function () {
-			for (var modulesCounter = 0, len = self.MODULES.length; modulesCounter < len; modulesCounter++) {
-				if (!self.MODULES[modulesCounter].started) {
-					self.stop(self.MODULES[modulesCounter].name);
+			for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
+				if (!selfOfPage.MODULES[modulesCounter].started) {
+					selfOfPage.stop(selfOfPage.MODULES[modulesCounter].name);
 				} else {
 				}
 			}
@@ -131,12 +133,12 @@ var Booklet = function (name, options) {
 		* @param {Function} listener
 		*/
 		this.subscribe = function (topic, listener) {
-		  if(!self.TOPICS[topic]) self.TOPICS[topic] = { queue: [] };
-		  var index = self.TOPICS[topic].queue.push(listener);
+		  if(!selfOfPage.TOPICS[topic]) selfOfPage.TOPICS[topic] = { queue: [] };
+		  var index = selfOfPage.TOPICS[topic].queue.push(listener);
 		  return (function(index) {
 		    return {
 		      remove: function() {
-		        delete self.TOPICS[index];
+		        delete selfOfPage.TOPICS[index];
 		      }
 		    }
 		  })(index);
@@ -152,9 +154,9 @@ var Booklet = function (name, options) {
 			var selectedModule,
 					indexOfTheModule,
 					builtModuleObj;
-			for (var modulesCounter = 0, len = self.MODULES.length; modulesCounter < len; modulesCounter++) {
-				if (self.MODULES[modulesCounter]['name'] === moduleName) {
-					selectedModule = self.MODULES[modulesCounter];
+			for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
+				if (selfOfPage.MODULES[modulesCounter]['name'] === moduleName) {
+					selectedModule = selfOfPage.MODULES[modulesCounter];
 					indexOfTheModule = modulesCounter;
 				}
 			};
@@ -174,19 +176,19 @@ var Booklet = function (name, options) {
 		* @param {Object} context
 		*/
 		this.createService = function (serviceName, context) {
-			self.SERVICES.push({name : serviceName, fn : context});
+			selfOfPage.SERVICES.push({name : serviceName, context : context});
 		};
 
 		/**
-		* getService() is a getter method to fetch the specified service with a service name
+		* getService() is a getter method to fetch the specified service within Page instance with a service name
 		*
 		* @param {String} serviceName
 		*/
 		this.getService = function (serviceName) {
 			var selectedService;
-			for (var servicesCounter = 0, len = self.SERVICES.length; servicesCounter < len; servicesCounter++) {
-				if (self.SERVICES[servicesCounter]['name'] === serviceName) {
-					selectedService = self.SERVICES[servicesCounter];
+			for (var servicesCounter = 0, len = selfOfPage.SERVICES.length; servicesCounter < len; servicesCounter++) {
+				if (selfOfPage.SERVICES[servicesCounter]['name'] === serviceName) {
+					selectedService = selfOfPage.SERVICES[servicesCounter];
 				}
 			};
 			return selectedService;
@@ -218,7 +220,7 @@ var Booklet = function (name, options) {
 	* @param {Object} options
 	*/
 	this.createView = function (options) {
-		self.defaults = (typeof options !== 'undefined' ? options : {});
+		selfOfBooklet.defaults = (typeof options !== 'undefined' ? options : {});
 		return new Page();
 	};
 
@@ -229,9 +231,23 @@ var Booklet = function (name, options) {
 	* @param {Object} context
 	*/
 	this.createService = function (serviceName, context) {
-		self.SERVICES.push({name : serviceName, fn : context});
+		selfOfBooklet.SERVICES.push({name : serviceName, context : context});
 	};
 
+	/**
+	* getService() is a getter method to fetch the specified service within Booklet instance with a service name
+	*
+	* @param {String} serviceName
+	*/
+	this.getService = function (serviceName) {
+		var selectedService;
+		for (var servicesCounter = 0, len = selfOfBooklet.SERVICES.length; servicesCounter < len; servicesCounter++) {
+			if (selfOfBooklet.SERVICES[servicesCounter]['name'] === serviceName) {
+				selectedService = selfOfBooklet.SERVICES[servicesCounter];
+			}
+		};
+		return selectedService;
+	};
 
 	/**
 	* publish() is a sending data method to subscriptions listening publishing events
@@ -240,8 +256,8 @@ var Booklet = function (name, options) {
 	* @param {Object} info
 	*/
 	this.publish = function (topic, info) {
-	  if(!self.TOPICS[topic] || !self.TOPICS[topic].queue.length) return;
-	  var items = self.TOPICS[topic].queue;
+	  if(!selfOfBooklet.TOPICS[topic] || !selfOfBooklet.TOPICS[topic].queue.length) return;
+	  var items = selfOfBooklet.TOPICS[topic].queue;
 	  for(var x = 0; x < items.length; x++) {
 	    items[x](info || {});
 	  }
