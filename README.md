@@ -8,7 +8,7 @@ The main attitude of this module binding system is inspired by Nicholas Zakas's 
 
 <pre lang="javascript">
 <code>
-var booklet = new Booklet('booking', {someOption : 'some options'});
+var app = new Booklet('app', {someOption : 'some options'});
 </code>
 </pre>
 
@@ -16,7 +16,7 @@ var booklet = new Booklet('booking', {someOption : 'some options'});
 
 <pre lang="javascript">
 <code>
-var page = booklet.createView('page');
+var page = app.createView('page');
 </code>
 </pre>
 
@@ -24,9 +24,9 @@ var page = booklet.createView('page');
 
 <pre lang="javascript">
 <code>
-page.register('testModule', function () {
+page.register('testModule', {
 	init : function () {
-		someMethod();
+		this.someMethod();
 	},
 	someMethod : function () {
 		console.log('someMethod initialized');
@@ -73,7 +73,7 @@ page.register('menu', {
    },
    getServiceWorked : function () {
       var testService = page.getService('testService');
-      return testService.context();
+      return testService();
    }
 })
 </code>
