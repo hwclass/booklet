@@ -188,7 +188,7 @@ var Booklet = function (name, options) {
 			var selectedService;
 			for (var servicesCounter = 0, len = selfOfPage.SERVICES.length; servicesCounter < len; servicesCounter++) {
 				if (selfOfPage.SERVICES[servicesCounter]['name'] === serviceName) {
-					selectedService = selfOfPage.SERVICES[servicesCounter];
+					selectedService = selfOfPage.SERVICES[servicesCounter]['context'];
 				}
 			};
 			return selectedService;
@@ -243,7 +243,7 @@ var Booklet = function (name, options) {
 		var selectedService;
 		for (var servicesCounter = 0, len = selfOfBooklet.SERVICES.length; servicesCounter < len; servicesCounter++) {
 			if (selfOfBooklet.SERVICES[servicesCounter]['name'] === serviceName) {
-				selectedService = selfOfBooklet.SERVICES[servicesCounter];
+				selectedService = selfOfBooklet.SERVICES[servicesCounter]['context'];
 			}
 		};
 		return selectedService;
