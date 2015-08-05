@@ -42,7 +42,7 @@ var Booklet = function (name, options) {
 	* @noparam
 	*/
 	var Page = function () {
-		
+
 		var selfOfPage = this;
 
 		this.booklet = booklet;
@@ -97,7 +97,6 @@ var Booklet = function (name, options) {
 			for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
 				if (!selfOfPage.MODULES[modulesCounter].started) {
 					selfOfPage.start(selfOfPage.MODULES[modulesCounter].name);
-				} else {
 				}
 			}
 		};
@@ -121,7 +120,6 @@ var Booklet = function (name, options) {
 			for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
 				if (!selfOfPage.MODULES[modulesCounter].started) {
 					selfOfPage.stop(selfOfPage.MODULES[modulesCounter].name);
-				} else {
 				}
 			}
 		};
@@ -133,15 +131,15 @@ var Booklet = function (name, options) {
 		* @param {Function} listener
 		*/
 		this.subscribe = function (topic, listener) {
-		  if(!selfOfPage.TOPICS[topic]) selfOfPage.TOPICS[topic] = { queue: [] };
-		  var index = selfOfPage.TOPICS[topic].queue.push(listener);
-		  return (function(index) {
-		    return {
-		      remove: function() {
-		        delete selfOfPage.TOPICS[index];
-		      }
-		    }
-		  })(index);
+			if(!selfOfPage.TOPICS[topic]) selfOfPage.TOPICS[topic] = { queue: [] };
+			var index = selfOfPage.TOPICS[topic].queue.push(listener);
+				return (function(index) {
+				return {
+					remove: function() {
+						delete selfOfPage.TOPICS[index];
+					}
+				}
+			})(index);
 		};
 
 		/**
@@ -152,8 +150,8 @@ var Booklet = function (name, options) {
 		*/
 		this.getModule = function (moduleName, withIndex) {
 			var selectedModule,
-					indexOfTheModule,
-					builtModuleObj;
+			indexOfTheModule,
+			builtModuleObj;
 			for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
 				if (selfOfPage.MODULES[modulesCounter]['name'] === moduleName) {
 					selectedModule = selfOfPage.MODULES[modulesCounter];
@@ -256,11 +254,11 @@ var Booklet = function (name, options) {
 	* @param {Object} info
 	*/
 	this.publish = function (topic, info) {
-	  if(!selfOfBooklet.TOPICS[topic] || !selfOfBooklet.TOPICS[topic].queue.length) return;
-	  var items = selfOfBooklet.TOPICS[topic].queue;
-	  for(var x = 0; x < items.length; x++) {
-	    items[x](info || {});
-	  }
+		if(!selfOfBooklet.TOPICS[topic] || !selfOfBooklet.TOPICS[topic].queue.length) return;
+		var items = selfOfBooklet.TOPICS[topic].queue;
+		for(var x = 0; x < items.length; x++) {
+			items[x](info || {});
+		}
 	};
 
 };
