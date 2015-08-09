@@ -21,8 +21,8 @@
 
 /**
 * Booklet : The main application wrapper object
-* @param {String} name
-* @param {Object} options
+* @param {string} name
+* @param {object} options
 */
 var Booklet = function (name, options) {
 	
@@ -54,8 +54,8 @@ var Booklet = function (name, options) {
 		/**
 		* register() is a registering method to add modules into the view model
 		*
-		* @param {String} moduleName
-		* @param {Function} context
+		* @param {string} moduleName
+		* @param {function} context
 		*/
 		this.register = function (moduleName, context) {
 			selfOfPage.MODULES.push({name : moduleName, fn : context, started : false});
@@ -64,7 +64,7 @@ var Booklet = function (name, options) {
 		/**
 		* detach() is a destroying the connection any module with the main booklet object
 		*
-		* @param {String} moduleName
+		* @param {string} moduleName
 		*/
 		this.detach = function (moduleName) {
 			var selectedModuleToDetach = selfOfPage.getModule(moduleName, true);
@@ -78,7 +78,7 @@ var Booklet = function (name, options) {
 		/**
 		* start() is starting point to make any module begin to work
 		*
-		* @param {String} moduleName
+		* @param {string} moduleName
 		*/
 		this.start = function (moduleName) {
 			var selectedModuleToStart = selfOfPage.getModule(moduleName);
@@ -104,7 +104,7 @@ var Booklet = function (name, options) {
 		/**
 		* stop() is a method to stop a module working
 		*
-		* @param {String} moduleName
+		* @param {string} moduleName
 		*/
 		this.stop = function (moduleName) {
 			var selectedModuleToStop = selfOfPage.getModule(moduleName);
@@ -127,8 +127,8 @@ var Booklet = function (name, options) {
 		/**
 		* subscribe() is a subscribing method to listen publishing events
 		*
-		* @param {String} topic
-		* @param {Function} listener
+		* @param {string} topic
+		* @param {function} listener
 		*/
 		this.subscribe = function (topic, listener) {
 			if(!selfOfPage.TOPICS[topic]) selfOfPage.TOPICS[topic] = { queue: [] };
@@ -145,8 +145,8 @@ var Booklet = function (name, options) {
 		/**
 		* getModule() is a getter method to get modules with a module name and its index
 		*
-		* @param {String} moduleName
-		* @param {Boolean} withIndex
+		* @param {string} moduleName
+		* @param {boolean} withIndex
 		*/
 		this.getModule = function (moduleName, withIndex) {
 			var selectedModule,
@@ -170,8 +170,8 @@ var Booklet = function (name, options) {
 		/**
 		* createService() is a creator method for new services
 		*
-		* @param {String} serviceName
-		* @param {Object} context
+		* @param {string} serviceName
+		* @param {object} context
 		*/
 		this.createService = function (serviceName, context) {
 			selfOfPage.SERVICES.push({name : serviceName, context : context});
@@ -180,7 +180,7 @@ var Booklet = function (name, options) {
 		/**
 		* getService() is a getter method to fetch the specified service within Page instance with a service name
 		*
-		* @param {String} serviceName
+		* @param {string} serviceName
 		*/
 		this.getService = function (serviceName) {
 			var selectedService;
@@ -215,7 +215,7 @@ var Booklet = function (name, options) {
 	/**
 	* createView() is a creator method for new views
 	*
-	* @param {Object} options
+	* @param {object} options
 	*/
 	this.createView = function (options) {
 		selfOfBooklet.defaults = (typeof options !== 'undefined' ? options : {});
@@ -225,8 +225,8 @@ var Booklet = function (name, options) {
 	/**
 	* createService() is a creator method for new services
 	*
-	* @param {String} serviceName
-	* @param {Object} context
+	* @param {string} serviceName
+	* @param {object} context
 	*/
 	this.createService = function (serviceName, context) {
 		selfOfBooklet.SERVICES.push({name : serviceName, context : context});
@@ -235,7 +235,7 @@ var Booklet = function (name, options) {
 	/**
 	* getService() is a getter method to fetch the specified service within Booklet instance with a service name
 	*
-	* @param {String} serviceName
+	* @param {string} serviceName
 	*/
 	this.getService = function (serviceName) {
 		var selectedService;
@@ -250,8 +250,8 @@ var Booklet = function (name, options) {
 	/**
 	* publish() is a sending data method to subscriptions listening publishing events
 	*
-	* @param {String} topic
-	* @param {Object} info
+	* @param {string} topic
+	* @param {object} info
 	*/
 	this.publish = function (topic, info) {
 		if(!selfOfBooklet.TOPICS[topic] || !selfOfBooklet.TOPICS[topic].queue.length) return;
