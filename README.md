@@ -51,6 +51,34 @@ page.startAll();
 </code>
 </pre>
 
+###Creating Services for Booklet Instance
+
+####Create a Booklet Service
+
+<pre lang="javascript">
+<code>
+app.createService('testService', function () {
+   return 'testService invoked'
+});
+</code>
+</pre>
+
+####Invoke the Current Booklet Service
+
+<pre lang="javascript">
+<code>
+page.register('menu', {
+   init : function () {
+      console.log(this.getServiceWorked()); //logs "testService invoked"
+   },
+   getServiceWorked : function () {
+      var testService = app.getService('testService');
+      return testService();
+   }
+})
+</code>
+</pre>
+
 ###Creating Services for Page Instance
 
 ####Create a Page Service
