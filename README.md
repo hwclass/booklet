@@ -106,3 +106,43 @@ page.register('menu', {
 })
 </code>
 </pre>
+
+//////////////////
+
+###Creating Configuration Options for Booklet instance
+
+####Create a Booklet instance configuration option
+
+<pre lang="javascript">
+<code>
+var app = new Booklet('app', {
+  appOption : 1
+});
+</code>
+</pre>
+
+####Create a Page instance configuration option
+
+<pre lang="javascript">
+<code>
+var page = app.createView('page', {
+  pageOption : 2
+})
+</code>
+</pre>
+
+####Create a Module Using Configuration Options
+
+<pre lang="javascript">
+<code>
+page.register('testModule', {
+   init : function () {
+      this.logOptions();
+   },
+   logOptions : function () {
+      console.dir(app.defaults);
+      console.dir(page.defaults);
+   }
+});
+</code>
+</pre>
