@@ -39,13 +39,15 @@ var Booklet = function (name, options) {
 
 	/**
 	* Page : The View-Model object to bind values and events
-	* @noparam
+	* @param {object} options
 	*/
-	var Page = function () {
+	var Page = function (options) {
 
 		var selfOfPage = this;
 
 		this.booklet = booklet;
+
+		this.defaults = options;
 
 		this.MODULES = [],
 		this.TOPICS = booklet.TOPICS,
@@ -215,11 +217,12 @@ var Booklet = function (name, options) {
 	/**
 	* createView() is a creator method for new views
 	*
+	* @param {string} name
 	* @param {object} options
 	*/
-	this.createView = function (options) {
-		selfOfBooklet.defaults = (typeof options !== 'undefined' ? options : {});
-		return new Page();
+	this.createView = function (name, options) {
+		var defaults = (typeof options !== 'undefined' ? options : {});
+		return new Page(defaults);
 	};
 
 	/**
