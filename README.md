@@ -107,8 +107,6 @@ page.register('menu', {
 </code>
 </pre>
 
-//////////////////
-
 ###Creating Configuration Options for Booklet instance
 
 ####Create a Booklet instance configuration option
