@@ -56,9 +56,8 @@ page.startAll();
 ####Create a Booklet Service
 
 <pre lang="javascript">
-<code>
-app.createService('testService', function () {
-   return 'testService invoked'
+<code>app.createService('testService', function () {
+	return 'testService invoked'
 });
 </code>
 </pre>
@@ -66,16 +65,15 @@ app.createService('testService', function () {
 ####Invoke the Current Booklet Service
 
 <pre lang="javascript">
-<code>
-page.register('menu', {
-   init : function () {
-      console.log(this.getServiceWorked()); //logs "testService invoked"
-   },
-   getServiceWorked : function () {
-      var testService = app.getService('testService');
-      return testService();
-   }
-})
+<code>page.register('menu', {
+	init : function () {
+	  console.log(this.getServiceWorked()); //logs "testService invoked"
+	},
+	getServiceWorked : function () {
+	  var testService = app.getService('testService');
+	  return testService();
+	}
+});
 </code>
 </pre>
 
@@ -84,9 +82,8 @@ page.register('menu', {
 ####Create a Page Service
 
 <pre lang="javascript">
-<code>
-page.createService('testService', function () {
-   return 'testService invoked'
+<code>page.createService('testService', function () {
+	return 'testService invoked'
 });
 </code>
 </pre>
@@ -94,16 +91,15 @@ page.createService('testService', function () {
 ####Invoke the Current Page Service
 
 <pre lang="javascript">
-<code>
-page.register('menu', {
-   init : function () {
-      console.log(this.getServiceWorked()); //logs "testService invoked"
-   },
-   getServiceWorked : function () {
-      var testService = page.getService('testService');
-      return testService();
-   }
-})
+<code>page.register('menu', {
+	init : function () {
+		console.log(this.getServiceWorked()); //logs "testService invoked"
+	},
+	getServiceWorked : function () {
+		var testService = page.getService('testService');
+		return testService();
+	}
+});
 </code>
 </pre>
 
@@ -114,7 +110,7 @@ page.register('menu', {
 <pre lang="javascript">
 <code>
 var app = new Booklet('app', {
-  appOption : 1
+	appOption : 1
 });
 </code>
 </pre>
@@ -124,7 +120,7 @@ var app = new Booklet('app', {
 <pre lang="javascript">
 <code>
 var page = app.createView('page', {
-  pageOption : 2
+	pageOption : 2
 })
 </code>
 </pre>
@@ -132,26 +128,24 @@ var page = app.createView('page', {
 ####Create a Module Using Configuration Options
 
 <pre lang="javascript">
-<code>
-page.register('testModule', {
-   init : function () {
-      this.logOptions();
-   },
-   logOptions : function () {
-      console.dir(app.defaults);
-      console.dir(page.defaults);
-   }
+<code>page.register('testModule', {
+	init : function () {
+		this.logOptions();
+	},
+	logOptions : function () {
+		console.dir(app.defaults);
+		console.dir(page.defaults);
+	}
 });
 </code>
 </pre>
 
 ###Creating Custom Events
 
-####Subscribe for an Event with View Instance
+####Subscribe for an Event with Page Instance
 
 <pre lang="javascript">
-<code>
-view.subscribe('testEvent', function (data) {
+<code>page.subscribe('testEvent', function (data) {
 	console.log(data);
 });
 </code>
@@ -160,8 +154,7 @@ view.subscribe('testEvent', function (data) {
 ####Publish an Event with Booklet Instance
 
 <pre lang="javascript">
-<code>
-app.publish('testEvent', {
+<code>app.publish('testEvent', {
 	testData : 'test data...'
 }); // logs Object {testData: "test data..."}
 </code>
