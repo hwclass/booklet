@@ -1,0 +1,26 @@
+{
+  "name": "booklet.js",
+  "version": "1.0.0",
+  "description": "A simple module initializer by creating view models.",
+  "main": "booklet-1.0.0.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hwclass/booklet.git"
+  },
+  "keywords": [
+    "booklet",
+    "js",
+    "javascript",
+    "client",
+    "module"
+  ],
+  "author": "hwclass",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hwclass/booklet/issues"
+  },
+  "homepage": "https://github.com/hwclass/booklet"
+}
