@@ -144,3 +144,25 @@ page.register('testModule', {
 });
 </code>
 </pre>
+
+###Creating Custom Events
+
+####Subscribe for an Event with View Instance
+
+<pre lang="javascript">
+<code>
+view.subscribe('testEvent', function (data) {
+	console.log(data);
+});
+</code>
+</pre>
+
+####Publish an Event with Booklet Instance
+
+<pre lang="javascript">
+<code>
+app.publish('testEvent', {
+	testData : 'test data...'
+}); // logs Object {testData: "test data..."}
+</code>
+</pre>
