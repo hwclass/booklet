@@ -159,3 +159,23 @@ var page = app.createView('page', {
 }); // logs Object {testData: "test data..."}
 </code>
 </pre>
+
+###Binding Events for Elements
+
+<pre lang="javascript">
+<code>page.register('testModule', {
+      init : function () {
+         this.bindEvents();
+      },
+      bindEvents : function () {
+         page.bindEvent(document.getElementsByTagName('body'), 'click', function () {
+            console.log('clicked on body');
+         });
+         page.bindEvent(document.getElementsByTagName('footer'), 'mouseout', function () {
+            console.log('mouse out on footer');
+         });
+      }
+   })
+</code>
+</pre>
+
