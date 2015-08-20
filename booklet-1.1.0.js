@@ -25,16 +25,41 @@
 * @param {object} options
 */
 var Booklet = function (name, options) {
-  
+
+  /*
+   *Setting the context to another variable to seperate the Page instance context and Booklet context
+   *@type {Booklet}
+   */
   var selfOfBooklet = this;
 
+  /*
+   *name variable of Booklet instance
+   *@type {string}
+   */
   this.name = name;
 
+  /*
+   *defaults object for identified options in Booklet instance
+   *@type {object}
+   */
   this.defaults = (typeof options !== 'undefined' ? options : {});
 
+  /*
+   *name variable of Booklet instance
+   *@type {string}
+   */
   var booklet = this;
 
+  /*
+   *SERVICES array to keep services that are defined into Booklet instance
+   *@type {array}
+   */
   this.SERVICES = [],
+  
+  /*
+   *TOPICS array to keep subscribed topics that are defined into Booklet instance
+   *@type {array}
+   */
   this.TOPICS = [];
 
   /**
@@ -43,30 +68,56 @@ var Booklet = function (name, options) {
   */
   var Page = function (options) {
 
+    /**
+     *Setting the context to another variable to seperate the Booklet instance context and Page context
+     *@type {Page}
+     */
     var selfOfPage = this;
 
+    /**
+     *booklet context setting for Booklet instance
+     *@type {Booklet}
+     */
     this.booklet = booklet;
 
+    /**
+     *defaults object for identified options in Page instance
+     *@type {object}
+     */
     this.defaults = options;
 
+    /**
+     *MODULES array to keep modules that are defined into Page instance
+     *@type {array}
+     */
     this.MODULES = [],
+
+    /**
+     *TOPICS array to keep subscribed topics that are defined into Page instance
+     *@type {array}
+     */
     this.TOPICS = booklet.TOPICS,
+
+    /**
+     *SERVICES array to keep services that are defined into Page instance
+     *@type {array}
+     */
     this.SERVICES = [];
 
     /**
-    * register() is a registering method to add modules into the view model
-    *
-    * @param {string} moduleName
-    * @param {function} context
-    */
+     * register() is a registering method to add modules into the view model
+     *
+     * @param {string} moduleName
+     * @param {function} context
+     */
     this.register = function (moduleName, context) {
       selfOfPage.MODULES.push({name : moduleName, fn : context, started : false});
     };
 
     /**
-    * detach() is a destroying the connection any module with the main booklet object
-    *
-    * @param {string} moduleName
+     * detach() is a destroying the connection any module with the main booklet object
+     *
+     * @param {string} moduleName
     */
     this.detach = function (moduleName) {
       var selectedModuleToDetach = selfOfPage.getModule(moduleName, true);
@@ -78,9 +129,9 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * start() is starting point to make any module begin to work
-    *
-    * @param {string} moduleName
+     * start() is starting point to make any module begin to work
+     *
+     * @param {string} moduleName
     */
     this.start = function (moduleName) {
       var selectedModuleToStart = selfOfPage.getModule(moduleName);
@@ -91,9 +142,9 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * startAll() is a starting point for all modules to make them all began to work
-    *
-    * @noparam
+     * startAll() is a starting point for all modules to make them all began to work
+     *
+     * @noparam
     */
     this.startAll = function () {
       for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
@@ -104,9 +155,9 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * stop() is a method to stop a module working
-    *
-    * @param {string} moduleName
+     * stop() is a method to stop a module working
+     *
+     * @param {string} moduleName
     */
     this.stop = function (moduleName) {
       var selectedModuleToStop = selfOfPage.getModule(moduleName);
@@ -114,9 +165,9 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * stopAll() is a method to stop working all modules
-    *
-    * @noparam
+     * stopAll() is a method to stop working all modules
+     *
+     * @noparam
     */
     this.stopAll = function () {
       for (var modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
@@ -127,15 +178,15 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * subscribe() is a subscribing method to listen publishing events
-    *
-    * @param {string} topic
-    * @param {function} listener
+     * subscribe() is a subscribing method to listen publishing events
+     *
+     * @param {string} topic
+     * @param {function} listener
     */
     this.subscribe = function (topic, listener) {
       if(!selfOfPage.TOPICS[topic]) selfOfPage.TOPICS[topic] = { queue: [] };
       var index = selfOfPage.TOPICS[topic].queue.push(listener);
-        return (function(index) {
+      return (function(index) {
         return {
           remove: function() {
             delete selfOfPage.TOPICS[index];
@@ -145,10 +196,10 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * getModule() is a getter method to get modules with a module name and its index
-    *
-    * @param {string} moduleName
-    * @param {boolean} withIndex
+     * getModule() is a getter method to get modules with a module name and its index
+     *
+     * @param {string} moduleName
+     * @param {boolean} withIndex
     */
     this.getModule = function (moduleName, withIndex) {
       var selectedModule,
@@ -170,19 +221,19 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * createService() is a creator method for new services
-    *
-    * @param {string} serviceName
-    * @param {object} context
+     * createService() is a creator method for new services
+     *
+     * @param {string} serviceName
+     * @param {object} context
     */
     this.createService = function (serviceName, context) {
       selfOfPage.SERVICES.push({name : serviceName, context : context});
     };
 
     /**
-    * getService() is a getter method to fetch the specified service within Page instance with a service name
-    *
-    * @param {string} serviceName
+     * getService() is a getter method to fetch the specified service within Page instance with a service name
+     *
+     * @param {string} serviceName
     */
     this.getService = function (serviceName) {
       var selectedService;
@@ -195,11 +246,11 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * bindEvent() is a method to bind events for the specified element.
-    *
-    * @param {object} element
-    * @param {string} eventType
-    * @param {function} callback
+     * bindEvent() is a method to bind events for the specified element.
+     *
+     * @param {object} element
+     * @param {string} eventType
+     * @param {function} callback
     */
     this.bindEvent = function(element, eventType, callback) {
       var el = element[0];
@@ -221,18 +272,18 @@ var Booklet = function (name, options) {
     };
 
     /**
-    * getConfig() is a method to get the current configuration properties and etc.
-    *
-    * @noparam
+     * getConfig() is a method to get the current configuration properties and etc.
+     *
+     * @noparam
     */
     this.getConfig = function () {
       return booklet.config;
     };
 
     /**
-    * getUtility() is a method to get the utility methods set into current context
-    *
-    * @noparam
+     * getUtility() is a method to get the utility methods set into current context
+     *
+     * @noparam
     */
     this.getUtility = function () {
       return booklet.utility;
@@ -241,10 +292,10 @@ var Booklet = function (name, options) {
   };
 
   /**
-  * createView() is a creator method for new views
-  *
-  * @param {string} name
-  * @param {object} options
+   * createView() is a creator method for new views
+   *
+   * @param {string} name
+   * @param {object} options
   */
   this.createView = function (name, options) {
     var defaults = (typeof options !== 'undefined' ? options : {});
@@ -252,19 +303,19 @@ var Booklet = function (name, options) {
   };
 
   /**
-  * createService() is a creator method for new services
-  *
-  * @param {string} serviceName
-  * @param {object} context
+   * createService() is a creator method for new services
+   *
+   * @param {string} serviceName
+   * @param {object} context
   */
   this.createService = function (serviceName, context) {
-    selfOfBooklet.SERVICES.push({name : serviceName, context : context});
+   selfOfBooklet.SERVICES.push({name : serviceName, context : context});
   };
 
   /**
-  * getService() is a getter method to fetch the specified service within Booklet instance with a service name
-  *
-  * @param {string} serviceName
+   * getService() is a getter method to fetch the specified service within Booklet instance with a service name
+   *
+   * @param {string} serviceName
   */
   this.getService = function (serviceName) {
     var selectedService;
@@ -277,10 +328,10 @@ var Booklet = function (name, options) {
   };
 
   /**
-  * publish() is a sending data method to subscriptions listening publishing events
-  *
-  * @param {string} topic
-  * @param {object} info
+   * publish() is a sending data method to subscriptions listening publishing events
+   *
+   * @param {string} topic
+   * @param {object} info
   */
   this.publish = function (topic, info) {
     if(!selfOfBooklet.TOPICS[topic] || !selfOfBooklet.TOPICS[topic].queue.length) return;
