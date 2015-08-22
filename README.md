@@ -2,6 +2,8 @@
 A simple module initializer by creating view models.
 The main attitude of this module binding system is inspired by Nicholas Zakas's presentation here : http://www.slideshare.net/nzakas/scalable-javascript-application-architecture
 
+<img src="https://badge.fury.io/js/booklet.js.svg"/>
+
 ###Usage
 
 ####Create a Booklet instance
