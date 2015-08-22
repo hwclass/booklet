@@ -1,6 +1,6 @@
 {
   "name": "booklet.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple module initializer by creating view models.",
   "main": "booklet-1.0.0.js",
   "scripts": {
@@ -10,6 +10,10 @@
     "type": "git",
     "url": "https://github.com/hwclass/booklet.git"
   },
+  "dist-tags": {
+    "latest" : "1.1.0"
+  },
+  "versions": "1.0.0",
   "keywords": [
     "booklet",
     "js",
