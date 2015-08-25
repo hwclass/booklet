@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hotel Fantastique</title>
+		<link rel="stylesheet" href="css.css" />
+		<!--[if lt IE 9]>
+		<script>
+			document.createElement('header');
+			document.createElement('nav');
+			document.createElement('section');
+			document.createElement('article');
+			document.createElement('aside');
+			document.createElement('footer');
+		</script>
+		<![endif]-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	
+	<body>
+	
+		<header class="header">
+			<h1 class="hotel_name">Hotel Fantastique <span class="stars">★★★★★</span></h1>
+			<address class="hotel_address">72b Rue de Awesome, 75001, Paris, France</address>
+		</header>
+		
+		<section class="photos">
+			<ul>
+				<li class="one_photo"><a href="img/1_large.jpg"><img src="img/1_thumb.jpg" alt="description of photo 1" /></a></li>
+				<li class="one_photo"><a href="img/2_large.jpg"><img src="img/2_thumb.jpg" alt="description of photo 2" /></a></li>
+				<li class="one_photo"><a href="img/3_large.jpg"><img src="img/3_thumb.jpg" alt="description of photo 3" /></a></li>
+				<li class="one_photo"><a href="img/4_large.jpg"><img src="img/4_thumb.jpg" alt="description of photo 4" /></a></li>
+				<li class="one_photo"><a href="img/5_large.jpg"><img src="img/5_thumb.jpg" alt="description of photo 5" /></a></li>
+				<li class="one_photo"><a href="img/6_large.jpg"><img src="img/6_thumb.jpg" alt="description of photo 6" /></a></li>
+				<li class="one_photo"><a href="img/7_large.jpg"><img src="img/7_thumb.jpg" alt="description of photo 7" /></a></li>
+				<li class="one_photo"><a href="img/8_large.jpg"><img src="img/8_thumb.jpg" alt="description of photo 8" /></a></li>
+				<li class="one_photo"><a href="img/9_large.jpg"><img src="img/9_thumb.jpg" alt="description of photo 9" /></a></li>
+				<li class="one_photo"><a href="img/10_large.jpg"><img src="img/10_thumb.jpg" alt="description of photo 10" /></a></li>
+				<li class="one_photo"><a href="img/11_large.jpg"><img src="img/11_thumb.jpg" alt="description of photo 11" /></a></li>
+				<li class="one_photo"><a href="img/12_large.jpg"><img src="img/12_thumb.jpg" alt="description of photo 12" /></a></li>
+				<li class="one_photo"><a href="img/13_large.jpg"><img src="img/13_thumb.jpg" alt="description of photo 13" /></a></li>
+				<li class="one_photo"><a href="img/14_large.jpg"><img src="img/14_thumb.jpg" alt="description of photo 14" /></a></li>
+			</ul>
+		</section>
+		
+		<section class="description">
+			<h2>Description</h2>
+			<p>Located in the heart of Paris, this 5-star hotel offers elegant guest rooms in a Hausmannian-style building. It features a fitness centre, a concierge and a tour desk with ticket service.</p>
+			<p>Decorated in a unique style, the air-conditioned guest rooms at the Hotel du Louvre are equipped with satellite TV, a minibar and free Wi-Fi access. Some rooms feature a seating area. All rooms have a private bathroom, some include marble features.</p>
+			<p>The hotel restaurant, Brasserie du Louvre, has a traditional Parisian decor and serves traditional French cuisine. A buffet breakfast is served every morning. Guests can also enjoy a cocktail and jazz evenings twice a week in the Defender Bar.</p>
+			<p>The 4 facades and terrace of this hotel overlook the famous Louvre Museum, the Opéra Garnier and the Comédie Française theatre.</p>
+			<p>Hotel du Louvre is situated 2 minutes from Palais Royal Metro Station, providing direct access to the Champs Elysees and the Place de la Bastille. Public parking is available nearby.</p>
+		</section>
+		
+		<section class="facilities">
+			<h2>Facilities</h2>
+			<ul>
+				<li>Free Wifi</li>
+				<li>Swimming Pool</li>
+				<li>Gym</li>
+				<li>24/7 reception</li>
+				<li>Concierge</li>
+				<li>Restaurant</li>
+				<li>Free Parking</li>
+				<li>Shoe-Shine</li>
+				<li>Satellite TV</li>
+				<li>Room Service</li>
+			</ul>
+		</section>
+		
+		<section class="rooms">
+			<h2>Select Your Room</h2>
+			<form method="post" action="" class="rooms_table_form">
+				<table class="rooms_table" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<th class="room_name">Room Name</th>
+							<th class="room_status_title">Status</th>
+							<th class="room_occupancy_title">
+								<p class="fl occupancyArrowsWrapper">
+									<span class="occupancy-order-up" style="display: block;">
+										<img src="img/review-up.png">
+									</span>
+									<span class="occupancy-order-down" style="display: block;">
+										<img src="img/review-down.png">
+									</span>
+								</p>
+								<p class="fl">
+									Occupancy
+								</p>
+							</th>
+							<th class="room_price_title">
+								<p class="fl roomPriceArrowsWrapper">
+									<span class="room-price-order-up" style="display: block;">
+										<img src="img/review-up.png">
+									</span>
+									<span class="room-price-order-down" style="display: block;">
+										<img src="img/review-down.png">
+									</span>
+								</p>
+								<p class="fl">
+									Price per Room
+								</p>
+							</th>
+							<th class="room_quantity">No. Rooms</th>
+							<th class="room_total_title">Total</th>
+						</tr>
+					</thead>
+					<tbody class="room_selection_list"></tbody>
+					<tfoot>
+						<tr>
+							<td colspan="6" class="fullTotalTitle">Full Total</td>
+						</tr>
+						<tr>
+							<td colspan="6" class="fullTotalPrice">€0.00</td>
+						</tr>
+						<tr>
+							<td colspan="6">
+								<button class="button" type="submit">Book Now</button>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</section>
+
+		<section class="reviews">
+			<p class="fl reviewOrderArrowsWrapper">
+				<span class="review-order-up" style="display: block;">
+					<img src="img/review-up.png">
+				</span>
+				<span class="review-order-down" style="display: block;">
+					<img src="img/review-down.png">
+				</span>
+			</p>
+			<h2 class="fl">Reviews</h2>
+			<p id="paginationWrapper" class="fr" style="margin: 25px 0 0 0;"></p>
+			<ul class="reviews_list clearfix"></ul>
+		</section>
+
+		<section class="similarHotels">
+			<h2>Similar Hotels</h2>
+			<table style="  margin: 0; padding: 0;">
+				<tr style="  margin: 0; padding: 0;">
+					<td width="100%" style="margin: 0; padding: 0;">
+						<ul id="similarHotelsList" style="list-style: none; list-style-type: none; margin: 0; padding: 0; width: 100%; display: table;"></ul>
+					</td>
+				</tr>
+			</table>
+		</section>
+	
+		<section class="footer">
+			&copy;2014 Booking.com
+		</section>
+		
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="js.js"></script>
+	</body>
+</html>
