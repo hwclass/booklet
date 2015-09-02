@@ -105,6 +105,64 @@ page.startAll();
 </code>
 </pre>
 
+###Creating Services for Booklet Instance with an Inner Service Provider
+
+####Create a Booklet Service
+
+<pre lang="javascript">
+<code>app.createService('testService', function () {
+	return 'testService invoked'
+});
+</code>
+</pre>
+
+####Invoke the Current Booklet Service by a Service Provider Method
+
+<pre lang="javascript">
+<code>page.register('menu', {
+	init : function () {
+	  console.log(this.getServiceWorked()); //logs "testService invoked"
+	},
+	getServiceWorked : function () {
+	  var testService = this.getService('testService');
+	  return testService();
+	},
+	getService : function (serviceName) {
+		return app.getService(serviceName);
+	}
+});
+</code>
+</pre>
+
+###Creating Services for Page Instance with an Inner Service Provider
+
+####Create a Page Service
+
+<pre lang="javascript">
+<code>page.createService('testService', function () {
+	return 'testService invoked'
+});
+</code>
+</pre>
+
+####Invoke the Current Page Service by a Service Provider Method
+
+<pre lang="javascript">
+<code>page.register('menu', {
+	init : function () {
+		console.log(this.getServiceWorked()); //logs "testService invoked"
+	},
+	getServiceWorked : function () {
+		var testService = this.getService('testService');
+		return testService();
+	},
+	getService : function (serviceName) {
+		return page.getService(serviceName);
+	}
+});
+</code>
+</pre>
+
 ###Creating Configuration Options for Booklet instance
 
 ####Create a Booklet instance configuration option
