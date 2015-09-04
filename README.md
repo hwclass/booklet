@@ -25,14 +25,13 @@ var page = app.createView('page');
 ####Bind a module into the instance with an init method calling the inner functions
 
 <pre lang="javascript">
-<code>
-page.register('testModule', {
-	init : function () {
-		this.someMethod();
-	},
-	someMethod : function () {
-		console.log('someMethod initialized');
-	}
+<code>page.register('testModule', {
+  init : function () {
+    this.someMethod();
+  },
+  someMethod : function () {
+    console.log('someMethod initialized');
+  }
 });
 </code>
 </pre>
@@ -59,7 +58,7 @@ page.startAll();
 
 <pre lang="javascript">
 <code>app.createService('testService', function () {
-	return 'testService invoked'
+  return 'testService invoked'
 });
 </code>
 </pre>
@@ -68,13 +67,13 @@ page.startAll();
 
 <pre lang="javascript">
 <code>page.register('menu', {
-	init : function () {
-	  console.log(this.getServiceWorked()); //logs "testService invoked"
-	},
-	getServiceWorked : function () {
-	  var testService = app.getService('testService');
-	  return testService();
-	}
+  init : function () {
+    console.log(this.getServiceWorked()); //logs "testService invoked"
+  },
+  getServiceWorked : function () {
+    var testService = app.getService('testService');
+    return testService();
+  }
 });
 </code>
 </pre>
@@ -85,7 +84,7 @@ page.startAll();
 
 <pre lang="javascript">
 <code>page.createService('testService', function () {
-	return 'testService invoked'
+  return 'testService invoked'
 });
 </code>
 </pre>
@@ -94,13 +93,13 @@ page.startAll();
 
 <pre lang="javascript">
 <code>page.register('menu', {
-	init : function () {
-		console.log(this.getServiceWorked()); //logs "testService invoked"
-	},
-	getServiceWorked : function () {
-		var testService = page.getService('testService');
-		return testService();
-	}
+  init : function () {
+    console.log(this.getServiceWorked()); //logs "testService invoked"
+  },
+  getServiceWorked : function () {
+    var testService = page.getService('testService');
+    return testService();
+  }
 });
 </code>
 </pre>
@@ -111,7 +110,7 @@ page.startAll();
 
 <pre lang="javascript">
 <code>app.createService('testService', function () {
-	return 'testService invoked'
+  return 'testService invoked'
 });
 </code>
 </pre>
@@ -120,16 +119,16 @@ page.startAll();
 
 <pre lang="javascript">
 <code>page.register('menu', {
-	init : function () {
-	  console.log(this.getServiceWorked()); //logs "testService invoked"
-	},
-	getServiceWorked : function () {
-	  var testService = this.getService('testService');
-	  return testService();
-	},
-	getService : function (serviceName) {
-		return app.getService(serviceName);
-	}
+  init : function () {
+    console.log(this.getServiceWorked()); //logs "testService invoked"
+  },
+  getServiceWorked : function () {
+    var testService = this.getService('testService');
+    return testService();
+  },
+  getService : function (serviceName) {
+    return app.getService(serviceName);
+  }
 });
 </code>
 </pre>
@@ -140,7 +139,7 @@ page.startAll();
 
 <pre lang="javascript">
 <code>page.createService('testService', function () {
-	return 'testService invoked'
+  return 'testService invoked'
 });
 </code>
 </pre>
@@ -149,16 +148,16 @@ page.startAll();
 
 <pre lang="javascript">
 <code>page.register('menu', {
-	init : function () {
-		console.log(this.getServiceWorked()); //logs "testService invoked"
-	},
-	getServiceWorked : function () {
-		var testService = this.getService('testService');
-		return testService();
-	},
-	getService : function (serviceName) {
-		return page.getService(serviceName);
-	}
+  init : function () {
+    console.log(this.getServiceWorked()); //logs "testService invoked"
+  },
+  getServiceWorked : function () {
+    var testService = this.getService('testService');
+    return testService();
+  },
+  getService : function (serviceName) {
+    return page.getService(serviceName);
+  }
 });
 </code>
 </pre>
@@ -168,8 +167,7 @@ page.startAll();
 ####Create a Booklet instance configuration option
 
 <pre lang="javascript">
-<code>
-var app = new Booklet('app', {
+<code>var app = new Booklet('app', {
 	appOption : 1
 });
 </code>
@@ -178,9 +176,8 @@ var app = new Booklet('app', {
 ####Create a Page instance configuration option
 
 <pre lang="javascript">
-<code>
-var page = app.createView('page', {
-	pageOption : 2
+<code>var page = app.createView('page', {
+  pageOption : 2
 })
 </code>
 </pre>
@@ -189,13 +186,13 @@ var page = app.createView('page', {
 
 <pre lang="javascript">
 <code>page.register('testModule', {
-	init : function () {
-		this.logOptions();
-	},
-	logOptions : function () {
-		console.dir(app.defaults);
-		console.dir(page.defaults);
-	}
+  init : function () {
+    this.logOptions();
+  },
+  logOptions : function () {
+    console.dir(app.defaults);
+    console.dir(page.defaults);
+  }
 });
 </code>
 </pre>
@@ -206,7 +203,7 @@ var page = app.createView('page', {
 
 <pre lang="javascript">
 <code>page.subscribe('testEvent', function (data) {
-	console.log(data);
+  console.log(data);
 });
 </code>
 </pre>
@@ -215,7 +212,7 @@ var page = app.createView('page', {
 
 <pre lang="javascript">
 <code>app.publish('testEvent', {
-	testData : 'test data...'
+  testData : 'test data...'
 }); // logs Object {testData: "test data..."}
 </code>
 </pre>
@@ -224,18 +221,18 @@ var page = app.createView('page', {
 
 <pre lang="javascript">
 <code>page.register('testModule', {
-      init : function () {
-         this.bindEvents();
-      },
-      bindEvents : function () {
-         page.bindEvent(document.getElementsByTagName('body'), 'click', function () {
-            console.log('clicked on body');
-         });
-         page.bindEvent(document.getElementsByTagName('footer'), 'mouseout', function () {
-            console.log('mouse out on footer');
-         });
-      }
-   })
+  init : function () {
+    this.bindEvents();
+  },
+  bindEvents : function () {
+    page.bindEvent(document.getElementsByTagName('body'), 'click', function () {
+      console.log('clicked on body');
+    });
+    page.bindEvent(document.getElementsByTagName('footer'), 'mouseout', function () {
+      console.log('mouse out on footer');
+    });
+  }
+});
 </code>
 </pre>
 
