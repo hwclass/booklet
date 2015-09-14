@@ -1,11 +1,11 @@
 'use strict';
 
 /**
-* Mock : The data mocking object 
+* Mock : The data mocking object
 * @noparam
 */
 var Mock = function () {
-	
+
 	var self = this;
 
 	this.data = {
@@ -314,116 +314,10 @@ var Mock = function () {
 
 }
 
-/**
-* Booklet : The main application wrapper object
-* @param <String> name
-* @param <Object> options
-*/
-var Booklet = function (name, options) {
-	
-	this.name = name;
-
-	this.defaults = (typeof options !== 'undefined' ? options : {});
-
-	var booklet = this;
-
-	/**
-	* Page : The View-Model Object to Bind Values and Events
-	* @noparam
-	*/
-	var Page = function () {
-		
-		var self = this;
-
-		this.booklet = booklet;
-
-		var modules = [];
-
-		this.register = function (moduleName, context) {
-			modules.push({name : moduleName, fn : context, started : false});
-		};
-
-		this.detach = function (moduleName) {
-			var selectedModuleToDetach = self.getModule(moduleName, true);
-			try {
-				modules.splice(selectedModuleToDetach.index, 1);
-			} catch (err) {
-				console.log(err);
-			};
-		};
-
-		this.start = function (moduleName) {
-			var selectedModuleToStart = self.getModule(moduleName);
-			if (!!selectedModuleToStart.fn) {
-				selectedModuleToStart.fn.init();
-				selectedModuleToStart.started = true;
-			}
-		};
-
-		this.startAll = function () {
-			for (var modulesCounter = 0, len = modules.length; modulesCounter < len; modulesCounter++) {
-				if (!modules[modulesCounter].started) {
-					self.start(modules[modulesCounter].name);
-				} else {
-				}
-			}
-		};
-
-		this.stop = function (moduleName) {
-			var selectedModuleToStop = self.getModule(moduleName);
-			selectedModuleToStop = null;
-		};
-
-		this.getModule = function (moduleName, withIndex) {
-			var selectedModule,
-					indexOfTheModule,
-					builtModuleObj;
-			for (var modulesCounter = 0, len = modules.length; modulesCounter < len; modulesCounter++) {
-				if (modules[modulesCounter]['name'] === moduleName) {
-					selectedModule = modules[modulesCounter];
-					indexOfTheModule = modulesCounter;
-				}
-			};
-			if (withIndex) {
-				selectedModule = builtModuleObj = {
-					selectedModule : selectedModule,
-					index : indexOfTheModule
-				} 
-			}
-			return selectedModule;
-		};
-
-		this.get = function (moduleName) {
-			var selectedModule;
-			for (var modulesCounter = 0, len = modules.length; modulesCounter < len; modulesCounter++) {
-				if (modules[modulesCounter]['name'] === moduleName) {
-					selectedModule = modules[modulesCounter];
-				}
-			};
-			return selectedModule;
-		};
-
-		this.getConfig = function () {
-			return booklet.config;
-		}
-
-		this.getUtility = function () {
-			return booklet.utility;
-		}
-
-	};
-
-	this.createPage = function (options) {
-		self.defaults = (typeof options !== 'undefined' ? options : {});
-		return new Page();
-	}
-
-}
-
 //Create an instance
 var booking = new Booklet('booking', {
 	someOption : 348939,
-	ajax : function (options, callback) { 
+	ajax : function (options, callback) {
 		$.ajax({
 			method: options.method,
 			dataType : options.dataType,
@@ -435,8 +329,8 @@ var booking = new Booklet('booking', {
 
 //Create a page instance from the Booklet
 var hotelDetail = booking.createPage({
-	someOption : 435244, 
-	getSomeString : function () { return 'name string'; } 
+	someOption : 435244,
+	getSomeString : function () { return 'name string'; }
 });
 
 /*---SIMILAR HOTELS MODULE INITIALIZATION---*/
@@ -563,7 +457,7 @@ hotelDetail.register('reviews', {
 			$(self.elements.reviewsList).html(sortedReviewsListAsHtml);
 		});
 	},
-	eventOnClickForPaginationDot : function (self, event) { 
+	eventOnClickForPaginationDot : function (self, event) {
 		self.changePaginationDotsOrientation(event.target.parentElement);
 	},
 	changePaginationDotsOrientation : function (eventTarget) {
@@ -672,25 +566,25 @@ hotelDetail.register('roomSelection', {
 			var sortedRoomSelectionListAsHtml = self.getSorted('.room_item', 'data-room-occupancy', 'up');
 			self.emptyRoomSelectionList();
 			$(self.elements.roomSelectionList).html(sortedRoomSelectionListAsHtml);
-			self.bindEvents();	
+			self.bindEvents();
 		});
 		$(self.elements.occupancyOrderDown).on('click', function () {
 			var sortedRoomSelectionListAsHtml = self.getSorted('.room_item', 'data-room-occupancy', 'down');
 			self.emptyRoomSelectionList();
 			$(self.elements.roomSelectionList).html(sortedRoomSelectionListAsHtml);
-			self.bindEvents();	
+			self.bindEvents();
 		});
 		$(self.elements.roomPriceOrderUp).on('click', function () {
 			var sortedRoomSelectionListAsHtml = self.getSorted('.room_item', 'data-room-price', 'up');
 			self.emptyRoomSelectionList();
 			$(self.elements.roomSelectionList).html(sortedRoomSelectionListAsHtml);
-			self.bindEvents();	
+			self.bindEvents();
 		});
 		$(self.elements.roomPriceOrderDown).on('click', function () {
 			var sortedRoomSelectionListAsHtml = self.getSorted('.room_item', 'data-room-price', 'down');
 			self.emptyRoomSelectionList();
 			$(self.elements.roomSelectionList).html(sortedRoomSelectionListAsHtml);
-			self.bindEvents();	
+			self.bindEvents();
 		});
 	},
 	getUnitPriceFromDom : function (element) {
@@ -748,5 +642,3 @@ hotelDetail.register('roomSelection', {
 
 //Start all modules of the Page
 hotelDetail.startAll();
-
-
