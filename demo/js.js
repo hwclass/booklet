@@ -6,6 +6,10 @@
 */
 var Mock = function () {
 
+	/*
+   *Setting for the context 'this' into another variable
+   *@type {Mock}
+   */
 	var self = this;
 
 	this.data = {
@@ -385,7 +389,7 @@ hotelDetail.register('reviews', {
 	},
 	injectReviewsIntoDom : function (reviews) {
 		var self = this,
-				reviewsList = this.elements.reviewsList;
+		reviewsList = this.elements.reviewsList;
 		if ($(reviewsList).find('li').length > 0) {
 			self.emptyReviewsList();
 		}
@@ -397,8 +401,8 @@ hotelDetail.register('reviews', {
 	},
 	injectReviewsIntoDomInRange : function (start, reviews) {
 		var self = this,
-				reviewsList = this.elements.reviewsList,
-				end = (self.remainingReviewsExist && (start + self.remainingReviews) == this.getNumberOfReviews() ? start + self.remainingReviews : (start + self.config.reviewsPerPage));
+		reviewsList = this.elements.reviewsList,
+		end = (self.remainingReviewsExist && (start + self.remainingReviews) == this.getNumberOfReviews() ? start + self.remainingReviews : (start + self.config.reviewsPerPage));
 		self.emptyReviewsList();
 		for (var counterForReviews = start; counterForReviews < end; counterForReviews++) {
 			$(reviewsList).append('<li class="review_item" data-score="'+reviews[counterForReviews]['score']+'"><strong class="review_score">' + reviews[counterForReviews]['score'] + '</strong><blockquote class="review_content">' + reviews[counterForReviews]['text'] + '<cite> ' + reviews[counterForReviews]['userName'] + ' </cite></blockquote></li>');
@@ -407,17 +411,17 @@ hotelDetail.register('reviews', {
 	},
 	emptyReviewsList : function () {
 		var self = this,
-				reviewsList = this.elements.reviewsList;
+		reviewsList = this.elements.reviewsList;
 		$(reviewsList).html('');
 	},
 	createPaginationDots : function () {
 		var self = this,
-				reviews = self.getReviews(),
-				reviewsPerPage = self.config.reviewsPerPage,
-				dividerForPagination = Math.floor(self.getNumberOfReviews() / reviewsPerPage),
-				numberOfReviews = self.getNumberOfReviews(),
-				remainingReviews = (self.getNumberOfReviews() % reviewsPerPage > 0 ? self.getNumberOfReviews() % reviewsPerPage : 0),
-				counterForReviews = (typeof counterForReviews != 'undefined' ? counterForReviews : 1);
+		reviews = self.getReviews(),
+		reviewsPerPage = self.config.reviewsPerPage,
+		dividerForPagination = Math.floor(self.getNumberOfReviews() / reviewsPerPage),
+		numberOfReviews = self.getNumberOfReviews(),
+		remainingReviews = (self.getNumberOfReviews() % reviewsPerPage > 0 ? self.getNumberOfReviews() % reviewsPerPage : 0),
+		counterForReviews = (typeof counterForReviews != 'undefined' ? counterForReviews : 1);
 		self.generatePaginationDots(counterForReviews, dividerForPagination, remainingReviews, function () {
 			self.setElements();
 		});
@@ -478,11 +482,11 @@ hotelDetail.register('reviews', {
 		$(paginationDot).find('span').removeClass('bg-color-white fore-color-blue bold cursor-pointer').addClass('cursor-pointer');
 	},
 	getSorted : function (selector, attrName, direction) {
-    return $($(selector).toArray().sort(function(firstElement, secondElement){
-      var firstElementScore = parseInt(firstElement.getAttribute(attrName)),
-          secondElementScore = parseInt(secondElement.getAttribute(attrName));
-      return (direction === 'down' ? firstElementScore - secondElementScore : secondElementScore - firstElementScore);
-    }));
+		return $($(selector).toArray().sort(function(firstElement, secondElement){
+			var firstElementScore = parseInt(firstElement.getAttribute(attrName)),
+			secondElementScore = parseInt(secondElement.getAttribute(attrName));
+			return (direction === 'down' ? firstElementScore - secondElementScore : secondElementScore - firstElementScore);
+		}));
 	},
 	createMockInstance : function (callback) {
 		this.config.mock = new Mock();
@@ -496,8 +500,8 @@ hotelDetail.register('reviews', {
 		this.createMockInstance(function () {
 			self.createPaginationDots();
 			self.getReviewsAsync(function (data) {
-				self.injectReviewsIntoDom(data);
-			});
+					self.injectReviewsIntoDom(data);
+				});
 			self.bindEvents();
 			self.config.theFirstSightOfPage = false;
 			self.fillReviews();
@@ -530,11 +534,11 @@ hotelDetail.register('roomSelection', {
 	},
 	injectRoomTypesIntoDom : function () {
 		var roomTypes = this.getRoomTypes(),
-				roomsTable = this.elements.roomsTable;
+		roomsTable = this.elements.roomsTable;
 		for (var counterForRoomTypes = 0, len = roomTypes.length; counterForRoomTypes < len; counterForRoomTypes++) {
 			var dealLink = (roomTypes[counterForRoomTypes].dealLink ? roomTypes[counterForRoomTypes].dealLink : false),
-					alertLink = (roomTypes[counterForRoomTypes].alertLink ? roomTypes[counterForRoomTypes].alertLink : false),
-					statusHtml = '';
+			alertLink = (roomTypes[counterForRoomTypes].alertLink ? roomTypes[counterForRoomTypes].alertLink : false),
+			statusHtml = '';
 			if (dealLink) {
 				statusHtml = '<a class="deal" target="_blank" href="'+ (roomTypes[counterForRoomTypes].dealLink ? roomTypes[counterForRoomTypes].dealLink : '#') + '"">' + roomTypes[counterForRoomTypes].status + '</a>';
 			} else {
@@ -555,7 +559,7 @@ hotelDetail.register('roomSelection', {
 	},
 	bindEvents : function () {
 		var self = this,
-				roomSelections = this.elements.roomSelections;
+			roomSelections = this.elements.roomSelections;
 		roomSelections.on('change', function (event) {
 			var unitPrice = self.getUnitPriceFromDom(event.target),
 					totalRoomPrice = self.calculateRoomPrice({unitPrice : unitPrice, quantity : event.target.value});
@@ -620,11 +624,11 @@ hotelDetail.register('roomSelection', {
 		$(roomSelectionList).html('');
 	},
 	getSorted : function (selector, attrName, direction) {
-    return $($(selector).toArray().sort(function(firstElement, secondElement){
-      var firstElementScore = parseInt(firstElement.getAttribute(attrName)),
-          secondElementScore = parseInt(secondElement.getAttribute(attrName));
-      return (direction === 'down' ? firstElementScore - secondElementScore : secondElementScore - firstElementScore);
-    }));
+		return $($(selector).toArray().sort(function(firstElement, secondElement){
+			var firstElementScore = parseInt(firstElement.getAttribute(attrName)),
+					secondElementScore = parseInt(secondElement.getAttribute(attrName));
+			return (direction === 'down' ? firstElementScore - secondElementScore : secondElementScore - firstElementScore);
+		}));
 	},
 	createMockInstance : function (callback) {
 		this.config.mock = new Mock();
