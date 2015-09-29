@@ -332,7 +332,7 @@ var booking = new Booklet('booking', {
 });
 
 //Create a page instance from the Booklet
-var hotelDetail = booking.createPage({
+var hotelDetail = booking.createView({
 	someOption : 435244,
 	getSomeString : function () { return 'name string'; }
 });
