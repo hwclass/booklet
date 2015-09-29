@@ -4,7 +4,7 @@
   "description": "A simple module initializer by creating view models.",
   "main": "booklet-1.0.0.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "module"
   ],
   "author": "hwclass",
-  "license": "MIT",
+  "license": "WTFPL",
   "bugs": {
     "url": "https://github.com/hwclass/booklet/issues"
   },
