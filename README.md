@@ -25,12 +25,16 @@ var page = app.createView('page');
 ####Bind a module into the instance with an init method calling the inner functions
 
 <pre lang="javascript">
-<code>page.register('testModule', {
-  init : function () {
-    this.someMethod();
-  },
-  someMethod : function () {
-    console.log('someMethod initialized');
+<code>page.register('testModule', function () {
+    return {
+      init : function () {
+        console.log('init invoked');
+        console.dir(self);
+      },
+      testFunc : function () {
+        console.log('testFunc invoked.');
+      }
+    }
   }
 });
 </code>
