@@ -18,7 +18,7 @@ var app = new Booklet('app', {someOption : 'some options'});
 
 <pre lang="javascript">
 <code>
-var page = app.createView('page');
+var page = app.createView('page', {somePageOption : 'some page options'});
 </code>
 </pre>
 
@@ -29,7 +29,26 @@ var page = app.createView('page');
     return {
       init : function () {
         console.log('init invoked');
-        console.dir(self);
+        this.testFunc();
+      },
+      testFunc : function () {
+        console.log('testFunc invoked.');
+      }
+    }
+  }
+});
+</code>
+</pre>
+
+####Bind a module into the instance with a Page instance in the callback
+
+<pre lang="javascript">
+<code>page.register('testModule', function (page) {
+    return {
+      init : function () {
+        console.log('init invoked');
+        var config = page.getConfig();
+        console.dir(config.somePageOption); // logs 'some page options'
       },
       testFunc : function () {
         console.log('testFunc invoked.');
@@ -239,4 +258,3 @@ page.startAll();
 });
 </code>
 </pre>
-
