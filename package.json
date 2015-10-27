@@ -11,7 +11,7 @@
     "url": "https://github.com/hwclass/booklet.git"
   },
   "dist-tags": {
-    "latest" : "1.1.0"
+    "latest": "1.1.0"
   },
   "versions": "1.0.0",
   "keywords": [
@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/hwclass/booklet/issues"
   },
-  "homepage": "https://github.com/hwclass/booklet"
+  "homepage": "https://github.com/hwclass/booklet",
+  "devDependencies": {
+    "xto6": "^1.1.2-alpha"
+  }
 }
