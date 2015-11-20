@@ -16,7 +16,7 @@
  * Manages the view states and other functionalities in page instances.
  * Every page instance is generated from a Booklet instance.
  * Page instances are related with a view and binds model data and functionalities.
- * When the init method of a Page instance is invoked, it means that you are about to init related module.  
+ * When the init method of a Page instance is invoked, it means that you are about to init related module.
  */
 
 /**
@@ -55,7 +55,7 @@ var Booklet = function (name, options) {
    *@type {array}
    */
   this.SERVICES = [],
-  
+
   /*
    *TOPICS array to keep subscribed topics that are defined into Booklet instance
    *@type {array}
@@ -215,7 +215,7 @@ var Booklet = function (name, options) {
         selectedModule = builtModuleObj = {
           selectedModule : selectedModule,
           index : indexOfTheModule
-        } 
+        }
       }
       return selectedModule;
     };
