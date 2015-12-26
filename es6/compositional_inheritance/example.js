@@ -11,7 +11,7 @@ let factory = function factory (context, options) {
 let moduleFactory = function moduleFactory (page, name, context) {
 	page.modules.push({name : name, context : context});
     return Object.assign(Object.create(context));
-} 
+}
 
 //models
 let app = {
@@ -35,13 +35,13 @@ let module = {
 //initialize
 
 //create a custom application
-let zizigo = app.create(app, {desc : 'zizigo web application description'}),
+let appName = app.create(app, {desc : 'appName web application description'}),
     appView = document.getElementById('app');
 
-appView.innerHTML = zizigo.desc;
+appView.innerHTML = appName.desc;
 
 //create a custom page
-let productDetailPage = page.create(page, {name : 'productDetail view on zizigo'}),
+let productDetailPage = page.create(page, {name : 'productDetail view on appName'}),
     productDetailView = document.getElementById('view');
 
 productDetailView.innerHTML = productDetailPage.name;
@@ -55,7 +55,7 @@ let someModule = module.create(productDetailPage, module, {name : 'someModule', 
         var someModuleView = document.getElementById('someModuleView');
     	someModuleView.innerHTML = 'logged from the new module registered.';
         console.dir(this);
-    } 
+    }
 }});
 
 //logs someModule's content with init and log methods
