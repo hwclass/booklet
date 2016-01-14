@@ -4,6 +4,8 @@ The main attitude of this module binding system is inspired by Nicholas Zakas's 
 
 <img src="https://badge.fury.io/js/booklet.js.svg"/>
 
+[![NPM](https://nodei.co/npm/booklet.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/booklet.png?downloads=true&downloadRank=true&stars=true)
+
 ###Usage
 
 ####Create a Booklet instance
