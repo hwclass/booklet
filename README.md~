@@ -260,8 +260,3 @@ page.startAll();
 });
 </code>
 </pre>
-
-#####TODO
-
-* The subscribe/publish structure to be implemented into modules like page instances
-* "Binding Events for Elements" section is needed to be moved over the first lines of the readme file.
