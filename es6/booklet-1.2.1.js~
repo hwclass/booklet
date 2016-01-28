@@ -26,7 +26,7 @@ const Booklet = (() => {
     * @param {string} name
     * @param {object} options
     */
-    const Booklet () {
+    const Booklet = function () {
         
       /*
        *Setting the context to another variable to seperate the Page instance context and Booklet context
@@ -69,7 +69,7 @@ const Booklet = (() => {
        * @param {string} name
        * @param {object} options
       */
-        this.createView (name, options) {
+        this.createView = function (name, options) {
             let defaults = typeof options !== 'undefined' ? options : {};
             return new Page(defaults);
         };
@@ -80,7 +80,7 @@ const Booklet = (() => {
        * @param {string} serviceName
        * @param {object} context
       */
-        this.createService (serviceName, context) {
+        this.createService = function (serviceName, context) {
             selfOfBooklet.SERVICES.push({
                 name: serviceName,
                 context: context
@@ -92,7 +92,7 @@ const Booklet = (() => {
        *
        * @param {string} serviceName
       */
-        this.getService (serviceName) {
+        this.getService = function (serviceName) {
             let selectedService;
             for (const servicesCounter = 0, len = selfOfBooklet.SERVICES.length; servicesCounter < len; servicesCounter++) {
                 if (selfOfBooklet.SERVICES[servicesCounter]['name'] === serviceName) {
@@ -109,7 +109,7 @@ const Booklet = (() => {
        * @param {string} topic
        * @param {object} info
       */
-        this.publish (topic, info) {
+        this.publish = function (topic, info) {
             if (!selfOfBooklet.TOPICS[topic] || !selfOfBooklet.TOPICS[topic].queue.length)
                 return;
             const items = selfOfBooklet.TOPICS[topic].queue;
@@ -123,7 +123,7 @@ const Booklet = (() => {
     * Page : The View-Model object to bind values and events
     * @param {object} options
     */
-    const Page (options) {
+    const Page = function (options) {
     
         /**
        *Setting the context to another variable to seperate the Booklet instance context and Page context
@@ -160,7 +160,7 @@ const Booklet = (() => {
        * @param {string} moduleName
        * @param {function} context
        */
-        this.register (moduleName, context) {
+        this.register = function (moduleName, context) {
             selfOfPage.MODULES.push({
                 name: moduleName,
                 fn: context(selfOfPage),
@@ -173,7 +173,7 @@ const Booklet = (() => {
        *
        * @param {string} moduleName
       */
-        this.detach (moduleName) {
+        this.detach = function (moduleName) {
             const selectedModuleToDetach = selfOfPage.getModule(moduleName, true);
             try {
                 selfOfPage.MODULES.splice(selectedModuleToDetach.index, 1);
@@ -188,7 +188,7 @@ const Booklet = (() => {
        *
        * @param {string} moduleName
       */
-        this.start (moduleName) {
+        this.start = function (moduleName) {
             const selectedModuleToStart = selfOfPage.getModule(moduleName);
             if (!!selectedModuleToStart.fn) {
                 selectedModuleToStart.fn.init();
@@ -201,7 +201,7 @@ const Booklet = (() => {
        *
        * @noparam
       */
-        this.startAll () {
+        this.startAll = function () {
             for (const modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
                 if (!selfOfPage.MODULES[modulesCounter].started) {
                     selfOfPage.start(selfOfPage.MODULES[modulesCounter].name);
@@ -214,7 +214,7 @@ const Booklet = (() => {
        *
        * @param {string} moduleName
       */
-        this.stop (moduleName) {
+        this.stop = function (moduleName) {
             let selectedModuleToStop = selfOfPage.getModule(moduleName);
             selectedModuleToStop = null;
         };
@@ -224,7 +224,7 @@ const Booklet = (() => {
        *
        * @noparam
       */
-        this.stopAll () {
+        this.stopAll = function () {
             for (const modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
                 if (!selfOfPage.MODULES[modulesCounter].started) {
                     selfOfPage.stop(selfOfPage.MODULES[modulesCounter].name);
@@ -238,7 +238,7 @@ const Booklet = (() => {
        * @param {string} topic
        * @param {function} listener
       */
-        this.subscribe (topic, listener) {
+        this.subscribe = function (topic, listener) {
             if (!selfOfPage.TOPICS[topic])
                 selfOfPage.TOPICS[topic] = { queue: [] };
             const index = selfOfPage.TOPICS[topic].queue.push(listener);
@@ -257,7 +257,7 @@ const Booklet = (() => {
        * @param {string} moduleName
        * @param {boolean} withIndex
       */
-        this.getModule (moduleName, withIndex) {
+        this.getModule = function (moduleName, withIndex) {
             let selectedModule, indexOfTheModule, builtModuleObj;
             for (const modulesCounter = 0, len = selfOfPage.MODULES.length; modulesCounter < len; modulesCounter++) {
                 if (selfOfPage.MODULES[modulesCounter]['name'] === moduleName) {
@@ -281,7 +281,7 @@ const Booklet = (() => {
        * @param {string} serviceName
        * @param {object} context
       */
-        this.createService (serviceName, context) {
+        this.createService = function (serviceName, context) {
             selfOfPage.SERVICES.push({
                 name: serviceName,
                 context: context
@@ -293,7 +293,7 @@ const Booklet = (() => {
        *
        * @param {string} serviceName
       */
-        this.getService (serviceName) {
+        this.getService = function (serviceName) {
             let selectedService;
             for (const servicesCounter = 0, len = selfOfPage.SERVICES.length; servicesCounter < len; servicesCounter++) {
                 if (selfOfPage.SERVICES[servicesCounter]['name'] === serviceName) {
@@ -311,7 +311,7 @@ const Booklet = (() => {
        * @param {string} eventType
        * @param {function} callback
       */
-        this.bindEvent (element, eventType, callback) {
+        this.bindEvent = function (element, eventType, callback) {
             const el = element[0];
             function listenHandler(e) {
                 const ret = callback.apply(this, arguments);
@@ -335,7 +335,7 @@ const Booklet = (() => {
        *
        * @noparam
       */
-        this.getConfig () {
+        this.getConfig = function () {
             return booklet.config;
         };
         
@@ -344,7 +344,7 @@ const Booklet = (() => {
        *
        * @noparam
       */
-        this.getUtility () {
+        this.getUtility = function () {
             return booklet.utility;
         };
     };
