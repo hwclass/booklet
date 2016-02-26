@@ -2,9 +2,9 @@
 A simple module initializer by creating view models.
 The main attitude of this module binding system is inspired by Nicholas Zakas's presentation here : http://www.slideshare.net/nzakas/scalable-javascript-application-architecture
 
-<img src="https://badge.fury.io/js/booklet.js.svg"/>
+<a href="https://www.npmjs.com/package/booklet.js"><img src="https://badge.fury.io/js/booklet.js.svg"/></a>
 
-[![NPM](https://nodei.co/npm/booklet.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/booklet.png?downloads=true&downloadRank=true&stars=true)
+[![NPM](https://nodei.co/npm/booklet.js.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/booklet.js?downloads=true&downloadRank=true&stars=true)
 
 ###Usage
 
@@ -74,6 +74,25 @@ page.start('testModule');
 <pre lang="javascript">
 <code>
 page.startAll();
+</code>
+</pre>
+
+###Binding Events for Elements
+
+<pre lang="javascript">
+<code>page.register('testModule', {
+  init : function () {
+    this.bindEvents();
+  },
+  bindEvents : function () {
+    page.bindEvent(document.getElementsByTagName('body'), 'click', function () {
+      console.log('clicked on body');
+    });
+    page.bindEvent(document.getElementsByTagName('footer'), 'mouseout', function () {
+      console.log('mouse out on footer');
+    });
+  }
+});
 </code>
 </pre>
 
@@ -242,26 +261,6 @@ page.startAll();
 </code>
 </pre>
 
-###Binding Events for Elements
-
-<pre lang="javascript">
-<code>page.register('testModule', {
-  init : function () {
-    this.bindEvents();
-  },
-  bindEvents : function () {
-    page.bindEvent(document.getElementsByTagName('body'), 'click', function () {
-      console.log('clicked on body');
-    });
-    page.bindEvent(document.getElementsByTagName('footer'), 'mouseout', function () {
-      console.log('mouse out on footer');
-    });
-  }
-});
-</code>
-</pre>
-
 #####TODO
 
 * The subscribe/publish structure to be implemented into modules like page instances
-* "Binding Events for Elements" section is needed to be moved over the first lines of the readme file.
