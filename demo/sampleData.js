@@ -1,3 +1,5 @@
+'use strict';
+
 /**
 * Mock : The data mocking object
 * @noparam

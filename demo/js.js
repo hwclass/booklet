@@ -1,26 +1,5 @@
 'use strict';
 
-//Create an instance
-var booking = new Booklet('booking', {
-	someOption : 348939,
-	ajax : function (options, callback) {
-		$.ajax({
-			method: options.method,
-			dataType : options.dataType,
-			url: options.url,
-			success : callback
-		})
-	}
-});
-
-//Create a page instance from the Booklet
-var hotelDetail = booking.createView({
-	someOption : 'some option',
-	getSomeString : function () {
-		return 'name string';
-	}
-});
-
 /*---SIMILAR HOTELS MODULE INITIALIZATION---*/
 hotelDetail.register('similarHotels', {
 	elements : {
