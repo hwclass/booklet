@@ -389,21 +389,25 @@ hotelDetail.register('reviews', {
 	},
 	injectReviewsIntoDom : function (reviews) {
 		var self = this,
-		reviewsList = this.elements.reviewsList;
+				reviewsList = this.elements.reviewsList;
+		
 		if ($(reviewsList).find('li').length > 0) {
 			self.emptyReviewsList();
 		}
+		
 		for (var counterForReviews = 0, len = self.config.reviewsPerPage; counterForReviews < len; counterForReviews++) {
 			$(reviewsList).append('<li class="review_item" data-score="'+reviews[counterForReviews]['score']+'"><strong class="review_score">' + reviews[counterForReviews]['score'] + '</strong><blockquote class="review_content">' + reviews[counterForReviews]['text'] + '<cite> ' + reviews[counterForReviews]['userName'] + ' </cite></blockquote></li>');
 		};
+		
 		self.changePaginationDotsOrientation($('.paginationLink').get(0));
+		
 		this.elements.reviewItem = $('.review_item');
 	},
 	injectReviewsIntoDomInRange : function (start, reviews) {
 		var self = this,
-		reviewsList = this.elements.reviewsList,
-		end = (self.remainingReviewsExist && (start + self.remainingReviews) == this.getNumberOfReviews() ? start + self.remainingReviews : (start + self.config.reviewsPerPage));
-		self.emptyReviewsList();
+				reviewsList = this.elements.reviewsList,
+				end = (self.remainingReviewsExist && (start + self.remainingReviews) == this.getNumberOfReviews() ? start + self.remainingReviews : (start + self.config.reviewsPerPage));
+				self.emptyReviewsList();
 		for (var counterForReviews = start; counterForReviews < end; counterForReviews++) {
 			$(reviewsList).append('<li class="review_item" data-score="'+reviews[counterForReviews]['score']+'"><strong class="review_score">' + reviews[counterForReviews]['score'] + '</strong><blockquote class="review_content">' + reviews[counterForReviews]['text'] + '<cite> ' + reviews[counterForReviews]['userName'] + ' </cite></blockquote></li>');
 		};
@@ -411,17 +415,17 @@ hotelDetail.register('reviews', {
 	},
 	emptyReviewsList : function () {
 		var self = this,
-		reviewsList = this.elements.reviewsList;
+				reviewsList = this.elements.reviewsList;
 		$(reviewsList).html('');
 	},
 	createPaginationDots : function () {
 		var self = this,
-		reviews = self.getReviews(),
-		reviewsPerPage = self.config.reviewsPerPage,
-		dividerForPagination = Math.floor(self.getNumberOfReviews() / reviewsPerPage),
-		numberOfReviews = self.getNumberOfReviews(),
-		remainingReviews = (self.getNumberOfReviews() % reviewsPerPage > 0 ? self.getNumberOfReviews() % reviewsPerPage : 0),
-		counterForReviews = (typeof counterForReviews != 'undefined' ? counterForReviews : 1);
+				reviews = self.getReviews(),
+				reviewsPerPage = self.config.reviewsPerPage,
+				dividerForPagination = Math.floor(self.getNumberOfReviews() / reviewsPerPage),
+				numberOfReviews = self.getNumberOfReviews(),
+				remainingReviews = (self.getNumberOfReviews() % reviewsPerPage > 0 ? self.getNumberOfReviews() % reviewsPerPage : 0),
+				counterForReviews = (typeof counterForReviews != 'undefined' ? counterForReviews : 1);
 		self.generatePaginationDots(counterForReviews, dividerForPagination, remainingReviews, function () {
 			self.setElements();
 		});
@@ -465,9 +469,9 @@ hotelDetail.register('reviews', {
 		self.changePaginationDotsOrientation(event.target.parentElement);
 	},
 	changePaginationDotsOrientation : function (eventTarget) {
-		var step = $(eventTarget).data('step');
-		var reviews = this.getReviews();
-		var reviewsPerPage = this.config.reviewsPerPage;
+		var step = $(eventTarget).data('step'),
+				reviews = this.getReviews(),
+				reviewsPerPage = this.config.reviewsPerPage;
 		$(eventTarget).off('click');
 		$(eventTarget).find('span').addClass('bg-color-white fore-color-blue bold').removeClass('cursor-pointer');
 		this.recoverLastSelectedPaginationDot($(this.lastSelectedPaginationDot));
