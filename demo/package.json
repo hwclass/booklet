@@ -4,7 +4,7 @@
   "description": "A demo page for booklet.js",
   "main": "js.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-js": "browserify js.js > build.js"
   },
   "keywords": [
     "booklet",

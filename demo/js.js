@@ -1,6 +1,12 @@
 'use strict';
 
-/*---SIMILAR HOTELS MODULE INITIALIZATION---*/
+var Mock = require('./sampleData'),
+    booking = require('./booking');
+
+//import hotel detail view    
+var hotelDetail = require('./hotelDetail');
+
+//similar hotel module initialization
 hotelDetail.register('similarHotels', {
 	elements : {
 		similarHotelsList : $('#similarHotelsList')
@@ -20,9 +26,8 @@ hotelDetail.register('similarHotels', {
 		this.injectHotelsIntoDom(this.getSimilarHotels());
 	}
 });
-/*---SIMILAR HOTELS MODULE INITIALIZATION---*/
 
-/*---REVIEWS HOTELS MODULE INITIALIZATION---*/
+//reviews of hotels registration
 hotelDetail.register('reviews', {
 	config : {
 		theFirstSightOfPage : true,
@@ -175,9 +180,8 @@ hotelDetail.register('reviews', {
 		});
 	}
 });
-/*---REVIEWS HOTELS MODULE INITIALIZATION---*/
 
-/*---ROOM SELECTION MODULE INITIALIZATION---*/
+//rooms selection registration
 hotelDetail.register('roomSelection', {
 	config : {
 		mock : null
@@ -308,8 +312,7 @@ hotelDetail.register('roomSelection', {
 			self.bindEvents();
 		});
 	}
-})
-/*---ROOM SELECTION MODULE INITIALIZATION---*/
+});
 
-//Start all modules of the Page
+//Start all modules of the hotel detail view
 hotelDetail.startAll();

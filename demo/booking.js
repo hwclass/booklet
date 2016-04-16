@@ -1,7 +1,7 @@
 'use strict';
 
 //Create an instance
-var booking = new Booklet('booking', {
+module.exports = new Booklet('booking', {
   someOption : 348939,
   ajax : function (options, callback) {
     $.ajax({
