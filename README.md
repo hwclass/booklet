@@ -6,21 +6,21 @@ The main attitude of this module binding system is inspired by Nicholas Zakas's 
 
 [![NPM](https://nodei.co/npm/booklet.js.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/booklet.js?downloads=true&downloadRank=true&stars=true)
 
-###Usage
+### Usage
 
-####Create a Booklet instance
+#### Create a Booklet instance
 
 ```javascript
 var app = new Booklet('app', {someOption : 'some options'});
 ```
 
-####Generate a Page instance by invoking createView method with a page name
+#### Generate a Page instance by invoking createView method with a page name
 
 ```javascript
 var page = app.createView('page', {somePageOption : 'some page options'});
 ```
 
-####Bind a module into the instance with an init method calling the inner functions
+#### Bind a module into the instance with an init method calling the inner functions
 
 ```javascript
 page.register('testModule', function () {
@@ -37,7 +37,7 @@ page.register('testModule', function () {
 });
 ```
 
-####Bind a module into the instance with a Page instance in the callback
+#### Bind a module into the instance with a Page instance in the callback
 
 ```javascript
 page.register('testModule', function (page) {
@@ -55,19 +55,19 @@ page.register('testModule', function (page) {
 });
 ```
 
-####Make the new module begin to work specifically mentioning its name
+#### Make the new module begin to work specifically mentioning its name
 
 ```javascript
 page.start('testModule');
 ```
 
-####Or make the all modules begin to work
+#### Or make the all modules begin to work
 
 ```
 page.startAll();
 ```
 
-###Binding Events for Elements
+### Binding Events for Elements
 
 ```javascript
 page.register('testModule', {
@@ -85,9 +85,9 @@ page.register('testModule', {
 });
 ```
 
-###Creating Services for Booklet Instance
+### Creating Services for Booklet Instance
 
-####Create a Booklet Service
+#### Create a Booklet Service
 
 ```javascript
 app.createService('testService', function () {
@@ -95,7 +95,7 @@ app.createService('testService', function () {
 });
 ```
 
-####Invoke the Current Booklet Service
+#### Invoke the Current Booklet Service
 
 ```javascript
 page.register('menu', {
@@ -109,9 +109,9 @@ page.register('menu', {
 });
 ```
 
-###Creating Services for Page Instance
+### Creating Services for Page Instance
 
-####Create a Page Service
+#### Create a Page Service
 
 ```javascript
 page.createService('testService', function () {
@@ -119,7 +119,7 @@ page.createService('testService', function () {
 });
 ```
 
-####Invoke the Current Page Service
+#### Invoke the Current Page Service
 
 ```javascript
 page.register('menu', {
@@ -133,9 +133,9 @@ page.register('menu', {
 });
 ```
 
-###Creating Services for Booklet Instance with an Inner Service Provider
+### Creating Services for Booklet Instance with an Inner Service Provider
 
-####Create a Booklet Service
+#### Create a Booklet Service
 
 ```javascript
 app.createService('testService', function () {
@@ -143,7 +143,7 @@ app.createService('testService', function () {
 });
 ```
 
-####Invoke the Current Booklet Service by a Service Provider Method
+#### Invoke the Current Booklet Service by a Service Provider Method
 
 ```javascript
 page.register('menu', {
@@ -160,9 +160,9 @@ page.register('menu', {
 });
 ```
 
-###Creating Services for Page Instance with an Inner Service Provider
+### Creating Services for Page Instance with an Inner Service Provider
 
-####Create a Page Service
+#### Create a Page Service
 
 ```javascript
 page.createService('testService', function () {
@@ -170,7 +170,7 @@ page.createService('testService', function () {
 });
 ```
 
-####Invoke the Current Page Service by a Service Provider Method
+#### Invoke the Current Page Service by a Service Provider Method
 
 ```javascript
 page.register('menu', {
@@ -187,9 +187,9 @@ page.register('menu', {
 });
 ```
 
-###Creating Configuration Options for Booklet instance
+### Creating Configuration Options for Booklet instance
 
-####Create a Booklet instance configuration option
+#### Create a Booklet instance configuration option
 
 ```javascript
 var app = new Booklet('app', {
@@ -197,7 +197,7 @@ var app = new Booklet('app', {
 });
 ```
 
-####Create a Page instance configuration option
+#### Create a Page instance configuration option
 
 ```javascript
 var page = app.createView('page', {
@@ -205,7 +205,7 @@ var page = app.createView('page', {
 })
 ```
 
-####Create a Module Using Configuration Options
+#### Create a Module Using Configuration Options
 
 ```javascript
 page.register('testModule', {
@@ -219,9 +219,9 @@ page.register('testModule', {
 });
 ```
 
-###Creating Custom Events
+### Creating Custom Events
 
-####Subscribe for an Event with Page Instance
+#### Subscribe for an Event with Page Instance
 
 ```javascript
 page.subscribe('testEvent', function (data) {
@@ -229,7 +229,7 @@ page.subscribe('testEvent', function (data) {
 });
 ```
 
-####Publish an Event with Booklet Instance
+#### Publish an Event with Booklet Instance
 
 ```javascript
 app.publish('testEvent', {
@@ -237,6 +237,6 @@ app.publish('testEvent', {
 }); // logs Object {testData: "test data..."}
 ```
 
-#####TODO
+##### TODO
 
 * The subscribe/publish structure to be implemented into modules like page instances
