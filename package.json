@@ -1,8 +1,8 @@
 {
   "name": "booklet.js",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A simple module initializer by creating view models.",
-  "main": "booklet-1.0.0.js",
+  "main": "booklet-1.2.1.js",
   "scripts": {
     "test": "mocha"
   },

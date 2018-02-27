@@ -10,26 +10,26 @@ The main attitude of this module binding system is inspired by Nicholas Zakas's 
 
 #### Create a Booklet instance
 
-```javascript
+```js
 var app = new Booklet('app', {someOption : 'some options'});
 ```
 
 #### Generate a Page instance by invoking createView method with a page name
 
-```javascript
+```js
 var page = app.createView('page', {somePageOption : 'some page options'});
 ```
 
 #### Bind a module into the instance with an init method calling the inner functions
 
-```javascript
-page.register('testModule', function () {
+```js
+page.register('testModule', () => {
     return {
-      init : function () {
+      init: () => {
         console.log('init invoked');
         this.testFunc();
       },
-      testFunc : function () {
+      testFunc: () => {
         console.log('testFunc invoked.');
       }
     }
@@ -39,15 +39,15 @@ page.register('testModule', function () {
 
 #### Bind a module into the instance with a Page instance in the callback
 
-```javascript
-page.register('testModule', function (page) {
+```js
+page.register('testModule', (page) => {
     return {
-      init : function () {
+      init: () => {
         console.log('init invoked');
         var config = page.getConfig();
         console.dir(config.somePageOption); // logs 'some page options'
       },
-      testFunc : function () {
+      testFunc: () => {
         console.log('testFunc invoked.');
       }
     }
@@ -57,7 +57,7 @@ page.register('testModule', function (page) {
 
 #### Make the new module begin to work specifically mentioning its name
 
-```javascript
+```js
 page.start('testModule');
 ```
 
@@ -69,16 +69,22 @@ page.startAll();
 
 ### Binding Events for Elements
 
-```javascript
+```js
+const elementCache = {
+  body: document.getElementsByTagName('body'),
+  footer: document.getElementsByTagName('footer')
+}
+
 page.register('testModule', {
-  init : function () {
+  init: () => {
     this.bindEvents();
   },
-  bindEvents : function () {
-    page.bindEvent(document.getElementsByTagName('body'), 'click', function () {
+  bindEvents: () => {
+    page.bindEvent(elementCache.body, 'click', () => {
       console.log('clicked on body');
     });
-    page.bindEvent(document.getElementsByTagName('footer'), 'mouseout', function () {
+
+    page.bindEvent(elementCache.footer, 'mouseout', () => {
       console.log('mouse out on footer');
     });
   }
@@ -89,20 +95,18 @@ page.register('testModule', {
 
 #### Create a Booklet Service
 
-```javascript
-app.createService('testService', function () {
-  return 'testService invoked'
-});
+```js
+app.createService('testService', () => 'testService invoked');
 ```
 
 #### Invoke the Current Booklet Service
 
-```javascript
+```js
 page.register('menu', {
-  init : function () {
+  init: () => {
     console.log(this.getServiceWorked()); //logs "testService invoked"
   },
-  getServiceWorked : function () {
+  getServiceWorked: () => {
     var testService = app.getService('testService');
     return testService();
   }
@@ -113,20 +117,18 @@ page.register('menu', {
 
 #### Create a Page Service
 
-```javascript
-page.createService('testService', function () {
-  return 'testService invoked'
-});
+```js
+page.createService('testService', () => 'testService invoked');
 ```
 
 #### Invoke the Current Page Service
 
-```javascript
+```js
 page.register('menu', {
-  init : function () {
+  init: () => {
     console.log(this.getServiceWorked()); //logs "testService invoked"
   },
-  getServiceWorked : function () {
+  getServiceWorked: () => {
     var testService = page.getService('testService');
     return testService();
   }
@@ -137,24 +139,22 @@ page.register('menu', {
 
 #### Create a Booklet Service
 
-```javascript
-app.createService('testService', function () {
-  return 'testService invoked'
-});
+```js
+app.createService('testService', () => 'testService invoked');
 ```
 
 #### Invoke the Current Booklet Service by a Service Provider Method
 
-```javascript
+```js
 page.register('menu', {
-  init : function () {
+  init: () => {
     console.log(this.getServiceWorked()); //logs "testService invoked"
   },
-  getServiceWorked : function () {
+  getServiceWorked: () => {
     var testService = this.getService('testService');
     return testService();
   },
-  getService : function (serviceName) {
+  getService: (serviceName) => {
     return app.getService(serviceName);
   }
 });
@@ -164,26 +164,22 @@ page.register('menu', {
 
 #### Create a Page Service
 
-```javascript
-page.createService('testService', function () {
-  return 'testService invoked'
-});
+```js
+page.createService('testService', () => 'testService invoked');
 ```
 
 #### Invoke the Current Page Service by a Service Provider Method
 
-```javascript
+```js
 page.register('menu', {
-  init : function () {
+  init: () => {
     console.log(this.getServiceWorked()); //logs "testService invoked"
   },
-  getServiceWorked : function () {
+  getServiceWorked: () => {
     var testService = this.getService('testService');
     return testService();
   },
-  getService : function (serviceName) {
-    return page.getService(serviceName);
-  }
+  getService: serviceName => page.getService(serviceName)
 });
 ```
 
@@ -191,7 +187,7 @@ page.register('menu', {
 
 #### Create a Booklet instance configuration option
 
-```javascript
+```js
 var app = new Booklet('app', {
 	appOption : 1
 });
@@ -199,7 +195,7 @@ var app = new Booklet('app', {
 
 #### Create a Page instance configuration option
 
-```javascript
+```js
 var page = app.createView('page', {
   pageOption : 2
 })
@@ -207,12 +203,12 @@ var page = app.createView('page', {
 
 #### Create a Module Using Configuration Options
 
-```javascript
+```js
 page.register('testModule', {
-  init : function () {
+  init: () => {
     this.logOptions();
   },
-  logOptions : function () {
+  logOptions: () => {
     console.dir(app.defaults);
     console.dir(page.defaults);
   }
@@ -223,15 +219,15 @@ page.register('testModule', {
 
 #### Subscribe for an Event with Page Instance
 
-```javascript
-page.subscribe('testEvent', function (data) {
+```js
+page.subscribe('testEvent', (data) => {
   console.log(data);
 });
 ```
 
 #### Publish an Event with Booklet Instance
 
-```javascript
+```js
 app.publish('testEvent', {
   testData : 'test data...'
 }); // logs Object {testData: "test data..."}
