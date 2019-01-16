@@ -4,7 +4,7 @@
   "description": "A simple module initializer by creating view models.",
   "main": "booklet-1.2.1.js",
   "scripts": {
-    "test": "mocha"
+    "test": "tape test | tap-html --out ./reports/report.html"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,8 @@
   },
   "homepage": "https://github.com/hwclass/booklet",
   "devDependencies": {
-    "xto6": "^1.1.2-alpha"
+    "bower": "^1.6.5",
+    "tap-html": "0.2.1",
+    "tape": "4.9.2"
   }
 }
