@@ -1,14 +1,18 @@
-const tape = require('tape');
+const test = require('tape');
 
-var test = require('tape');
-
-test('timing test', function (t) {
+test('one', function (t) {
     t.plan(2);
-
-    t.equal(typeof Date.now, 'function');
-    var start = Date.now();
-
+    t.ok(true);
     setTimeout(function () {
-        t.equal(Date.now() - start, 100);
+        t.equal(1+3, 4);
     }, 100);
+});
+
+test('two', function (t) {
+    t.plan(3);
+    t.equal(5, 2+3);
+    setTimeout(function () {
+        t.equal('a'.charCodeAt(0), 97);
+        t.ok(true);
+    }, 50);
 });
